@@ -1,0 +1,23 @@
+@mixin inputSize ($size) {
+    $font-size: map_get($size, font-size);
+    $line-height: map_get($size, line-height);
+    $padding-x: map_get($size, padding-x);
+    $padding-y: map_get($size, padding-y);
+    $height: $font-size * $line-height + 2 * $padding-y + 2;
+    font-size: rem($font-size);
+    line-height: $line-height;
+
+    height: rem($height);
+    padding: rem($padding-y $padding-x);
+}
+
+
+@mixin inputStyle ($border, $focusBorder) {
+    border-color: $border;
+    &:not(.readonly):not([readonly]):not(.disabled):not([disabled]) {
+        &:focus {
+            border-color: $focusBorder;
+            box-shadow: 0 0 rem(8) rgba($focusBorder, .35);
+        }
+    }
+}

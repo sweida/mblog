@@ -1,0 +1,44 @@
+//clearfix
+@mixin clearFix() {
+  &:before,
+  &:after {
+    display: table;
+
+    content: ' ';
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+//设置placeholder
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content
+  }
+  &::-moz-placeholder {
+    @content
+  }
+  &:-ms-input-placeholder {
+    @content
+  }
+}
+
+
+@mixin scrollbar {
+  &::-webkit-scrollbar{
+    width: rem(6);
+    height: rem(6);
+  }
+  &::-webkit-scrollbar-button:vertical,
+  &::-webkit-scrollbar-button:horizontal { display: none; }
+  &::-webkit-scrollbar-track:vertical,
+  &::-webkit-scrollbar-track:horizontal,
+  &::-webkit-scrollbar-track-piece{ background-color: transparent; }
+  &::-webkit-scrollbar-thumb:vertical,
+  &::-webkit-scrollbar-thumb:horizontal{  background-color: #e8e9e7; }
+  &::-webkit-scrollbar-thumb:vertical:hover,
+  &::-webkit-scrollbar-thumb:vertical:active,
+  &::-webkit-scrollbar-thumb:horizontal:hover,
+  &::-webkit-scrollbar-thumb:horizontal:active {  background-color: $color-app; }
+}

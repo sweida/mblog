@@ -1,0 +1,27 @@
+
+@mixin buttonSize ($size) {
+    $font-size: map_get($size, font-size);
+    $line-height: map_get($size, line-height);
+    $padding-x: map_get($size, padding-x);
+    $padding-y: map_get($size, padding-y);
+    font-size: rem($font-size);
+    line-height: $line-height;
+    padding: rem($padding-y $padding-x);
+    /* height: rem(2 + 2 * $padding-y + $font-size * $line-height); */
+}
+
+
+
+@mixin buttonStyle ($border, $background, $color, $hoverBorder, $hoverBackground, $hoverColor) {
+    color: $color;
+    border-color: $border;
+    background-color: $background;
+    &:not(.readonly):not([readonly]):not(.disabled):not([disabled]) {
+        &:hover,
+        &:active {
+            color: $hoverColor;
+            border-color: $hoverBorder;
+            background-color: $hoverBackground;
+        }
+    }
+}

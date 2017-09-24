@@ -1,0 +1,102 @@
+@mixin checkboxSize($size) {
+	padding-left: $size;
+
+	> .icon {
+		width: $size;
+		height: $size;
+	}
+}
+@mixin checkboxStyle ($color) {
+	> .icon {
+		border-color: $color;
+	}
+	> input[type="checkbox"] {
+		&:checked ~ .icon:after {
+			@if $enable-form-translation {
+				transition: $form-transition;
+			}
+			border-left-color: $color;
+			border-bottom-color: $color;
+		}
+		&:disabled, &.disabled {
+			~ .icon,
+			~ span {
+				opacity: $disabled-opacity;
+				cursor: not-allowed;
+			}
+		}
+	}
+}
+
+
+@mixin radioSize($size) {
+	padding-left: $size;
+
+	> .icon {
+		width: $size;
+		height: $size;
+	}
+}
+@mixin radioStyle ($color) {
+	> .icon {
+		border-color: $color;
+	}
+	> input[type="radio"] {
+		&:checked ~ .icon:after {
+			@if $enable-form-translation {
+				transition: $form-transition;
+			}
+			background-color: $color;
+		}
+		&:disabled, &.disabled {
+			~ .icon,
+			~ span {
+				opacity: $disabled-opacity;
+				cursor: not-allowed;
+			}
+		}
+	}
+}
+
+
+@mixin switchSize ($width, $height) {
+  padding-left: $width;
+  $_height : $height - rem(2);
+  $_width  : $width - rem(2);
+  > .icon {
+    width: $width;
+    height: $height;
+    border-radius: $height;
+    &:before{
+      width: $_width;
+      height: $_height;
+      border-radius: $_height / 2;
+    }
+    &:after {
+      width: $_height;
+      height: $_height;
+    }
+  }
+  > input {
+    &:checked ~ .icon:after{
+      $_left :( $width - rem(2) - $_height);
+      transform: translateX($_left);
+    }
+  }
+}
+
+@mixin switchStyle($color) {
+  > input {
+    &:checked ~ .icon {
+      border-color: $color;
+      background-color: $color;
+    }
+    &:disabled, &.disabled {
+      ~ .icon,
+      ~ span {
+        opacity: $disabled-opacity;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

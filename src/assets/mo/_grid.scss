@@ -1,0 +1,45 @@
+.mo-container, .mo-container-fluid {
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: $grid-spacing;
+	padding-right: $grid-spacing;
+}
+
+.mo-container {
+	max-width: rem(1280);
+}
+
+.mo-row {
+	margin-left: -$grid-spacing;
+	margin-right: -$grid-spacing;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.mo-cell, [class^="mo-cell-"], [class*=" mo-cell-"] {
+	position: relative;
+	min-height: 1px;
+	padding-left: $grid-spacing;
+	padding-right: $grid-spacing;
+	width: 100%/* flex-basis: 100%;
+	max-width: 100%; */
+}
+
+.mo-cell {
+	flex-basis: 0;
+	flex-grow: 1;
+	max-width: 100%;
+}
+
+@include makeCell();
+@media screen and (max-width:640px) {
+	.mo-row {
+		flex-wrap: wrap;
+	}
+	.mo-cell, [class^="mo-cell-"], [class*=" mo-cell-"] {
+		width: 100%;
+		flex: 0 0 auto;
+		max-width: 100%;
+	}
+}

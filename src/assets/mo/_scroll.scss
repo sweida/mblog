@@ -1,0 +1,61 @@
+pre::-webkit-scrollbar,
+table::-webkit-scrollbar,
+div::-webkit-scrollbar{
+  width: 6px;
+  height: 6px;
+}
+pre::-webkit-scrollbar-button:vertical,
+pre::-webkit-scrollbar-button:horizontal,
+div::-webkit-scrollbar-button:vertical,
+div::-webkit-scrollbar-button:horizontal,
+table::-webkit-scrollbar-button:vertical,
+table::-webkit-scrollbar-button:horizontal {
+  display: none;
+}
+pre::-webkit-scrollbar-track:vertical,
+pre::-webkit-scrollbar-track:horizontal,
+pre::-webkit-scrollbar-track-piece,
+div::-webkit-scrollbar-track:vertical,
+div::-webkit-scrollbar-track:horizontal,
+div::-webkit-scrollbar-track-piece,
+table::-webkit-scrollbar-track:vertical,
+table::-webkit-scrollbar-track:horizontal,
+table::-webkit-scrollbar-track-piece, {
+   background-color: transparent;
+}
+pre::-webkit-scrollbar-thumb:vertical,
+div::-webkit-scrollbar-thumb:vertical,
+table::-webkit-scrollbar-thumb:vertical,
+pre::-webkit-scrollbar-thumb:horizontal,
+div::-webkit-scrollbar-thumb:horizontal,
+table::-webkit-scrollbar-thumb:horizontal {
+  background-color: #e8e9e7;
+}
+
+pre::-webkit-scrollbar-thumb:vertical:hover,
+div::-webkit-scrollbar-thumb:vertical:hover,
+table::-webkit-scrollbar-thumb:vertical:hover,
+pre::-webkit-scrollbar-thumb:vertical:active,
+div::-webkit-scrollbar-thumb:vertical:active,
+table::-webkit-scrollbar-thumb:vertical:active,
+pre::-webkit-scrollbar-thumb:horizontal:hover,
+div::-webkit-scrollbar-thumb:horizontal:hover,
+table::-webkit-scrollbar-thumb:horizontal:hover,
+pre::-webkit-scrollbar-thumb:horizontal:active,
+div::-webkit-scrollbar-thumb:horizontal:active,
+table::-webkit-scrollbar-thumb:horizontal:active {
+  background-color: #6bc30d;
+}
+
+
+
+
+::-moz-selection {
+  color: #fff;
+  background-color: #6bc30d;
+  text-shadow: none; }
+
+::selection {
+  color: #fff;
+  background-color: #6bc30d;
+  text-shadow: none; }

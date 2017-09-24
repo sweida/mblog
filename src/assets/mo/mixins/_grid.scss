@@ -1,0 +1,10 @@
+@mixin makeCell($columns:$grid-columns) {
+	@for $i from 1 through $columns {
+		.mo-cell-#{$i}{
+			$width: percentage($i / $columns);
+			width: $width;
+			/* flex-basis: $width;
+			max-width: $width; */
+		}
+	}
+}
