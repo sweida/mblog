@@ -10,6 +10,6 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+@import './admin/scss/admin';
 </style>

@@ -1,125 +1,128 @@
 .mo-input {
-    font-family: inherit;
-    display: inline-block;
-    width: 100%;
-    color: $color-text;
-    border: rem(1) solid transparent;
-    border-radius: 0;
-    outline: none;
-    background-color: #fff;
-    background-image: none;
-    appearance: none;
-    @include inputStyle ($color-border, $color-primary);
-    @include inputSize ($form-size);
-
-    //size
-    &.mo-input-tiny {
-        @include inputSize ($form-size-tiny);
+  font-family: inherit;
+  display: inline-block;
+  width: 100%;
+  color: $color-text;
+  border: rem(1) solid transparent;
+  border-radius: 0;
+  outline: none;
+  background-color: #fff;
+  background-image: none;
+  appearance: none;
+  @include inputStyle ($color-border, $color-primary);
+  @include inputSize ($form-size); //size
+  &.mo-input-tiny {
+    @include inputSize ($form-size-tiny);
+  }
+  &.mo-input-small {
+    @include inputSize ($form-size-small);
+  }
+  &.mo-input-large {
+    @include inputSize ($form-size-large);
+  }
+  &.mo-input-flex {
+    width: auto;
+    min-width: 50%;
+  } //style
+  &.mo-input-primary {
+    @include inputStyle ($color-primary, $color-primary);
+  } // &.mo-input-positive {
+  //     @include inputStyle ($color-positive, $color-positive);
+  // }
+  // &.mo-input-negative {
+  //     @include inputStyle ($color-negative, $color-negative);
+  // }
+  @include placeholder {
+    color: $color-placeholder;
+  }
+  &:not(.readonly):not([readonly]):not(.disabled):not([disabled]) {
+    &:focus {
+      @if $enable-form-translation {
+        transition: $form-transition;
+        outline: 0;
+      }
     }
-    &.mo-input-small {
-        @include inputSize ($form-size-small);
-    }
-    &.mo-input-large {
-        @include inputSize ($form-size-large);
-    }
-    &.mo-input-flex {
-        width: auto;
-        min-width: 50%;
-    }
-    //style
-    &.mo-input-primary {
-        @include inputStyle ($color-primary, $color-primary);
-    }
-    &.mo-input-positive {
-        @include inputStyle ($color-positive, $color-positive);
-    }
-    &.mo-input-negative {
-        @include inputStyle ($color-negative, $color-negative);
-    }
-    @include placeholder {
-        color: $color-placeholder;
-    }
-    &:not(.readonly):not([readonly]):not(.disabled):not([disabled]) {
-        &:focus {
-            @if $enable-form-translation {
-                transition: $form-transition;
-                outline: 0;
-            }
-        }
-    }
-    &.readonly, &[readonly] {
-        cursor: default;
-    }
-    &.disabled, &[disabled] {
-        cursor: not-allowed;
-        opacity: $disabled-opacity;
-    }
+  }
+  &.readonly,
+  &[readonly] {
+    cursor: default;
+  }
+  &.disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: $disabled-opacity;
+  }
 }
+
 //fixed select
 select {
-    &.mo-input:not([multiple]) {
-        padding-right: 1.75rem;
-        vertical-align: middle;
-        background-image: $image64-dropdown;
-        background-repeat: no-repeat;
-        background-position: right rem(5) center;
+  &.mo-input:not([multiple]) {
+    padding-right: 1.75rem;
+    vertical-align: middle;
+    background-image: $image64-dropdown;
+    background-repeat: no-repeat;
+    background-position: right rem(5) center;
+    &::-ms-expand {
+      display: none;
+    }
+  }
+}
 
-        &::-ms-expand {
-            display: none;
-        }
-    }
-}
 //fixed textarea height
-textarea, select[multiple] {
-    &.mo-input {
-        height: auto;
-    }
-}
+textarea,
 select[multiple] {
-    &.mo-input {
-        padding-right: 0\0;
-    }
+  &.mo-input {
+    height: auto;
+  }
 }
+
+select[multiple] {
+  &.mo-input {
+    padding-right: 0\0;
+  }
+}
+
 //input-group
 .mo-inputs {
-    position: relative;
-    display: inline-flex;
-    width: 100%;
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  margin-bottom: 0;
+  .mo-inputs__cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    margin-left: rem(-1);
     margin-bottom: 0;
-
-    .mo-inputs__cell {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        margin-left: rem(-1);
-        margin-bottom: 0;
-        transition: none;
-        &:hover, &:focus, &:active {
-            transition: none;
-        }
-        &:first-child {
-            margin-left: 0;
-        }
-        &:not(:first-child):not(:last-child) {
-            border-radius: 0;
-        }
-        &:not(:last-child) {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-        &:not(:first-child) {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-        &.mo-input:focus {
-            position: relative;
-            z-index: 2;
-            transition: none;
-        }
+    transition: none;
+    &:hover,
+    &:focus,
+    &:active {
+      transition: none;
     }
-    .mo-btn[readonly] {
-        color: $color-description;
+    &:first-child {
+      margin-left: 0;
     }
+    &:not(:first-child):not(:last-child) {
+      border-radius: 0;
+    }
+    &:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    &.mo-input:focus {
+      position: relative;
+      z-index: 2;
+      transition: none;
+    }
+  }
+  .mo-btn[readonly] {
+    color: $color-description;
+  }
 }

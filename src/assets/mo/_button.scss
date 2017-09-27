@@ -1,156 +1,166 @@
 .mo-btn {
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    white-space: nowrap;
-    text-decoration: none;
-    border: rem(1) solid transparent;
-    border-radius: 0;
-    outline: 0;
-    appearance: none;
-    font-family: inherit;
-    cursor: pointer;
-    @include buttonSize ($form-size);
-    @include buttonStyle($color-border, #fff, $color-text, darken($color-border, 5%), $color-lighter, $color-text);
-    &.mo-btn-primary {
-        @include buttonStyle($color-primary, $color-primary, #fff, darken($color-primary, 10%), darken($color-primary, 10%), #fff);
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-decoration: none;
+  border: rem(1) solid transparent;
+  border-radius: 0;
+  outline: 0;
+  appearance: none;
+  font-family: inherit;
+  cursor: pointer;
+  @include buttonSize ($form-size);
+  @include buttonStyle($color-border, #fff, $color-text, darken($color-border, 5%), $color-lighter, $color-text);
+  &.mo-btn-primary {
+    @include buttonStyle($color-primary, $color-primary, #fff, darken($color-primary, 10%), darken($color-primary, 10%), #fff);
+  }
+  &.mo-btn-negative {
+    @include buttonStyle($color-negative, $color-negative, #fff, darken($color-negative, 10%), darken($color-negative, 10%), #fff);
+  }
+  &.mo-btn-positive {
+    @include buttonStyle($color-positive, $color-positive, #fff, darken($color-positive, 10%), darken($color-positive, 10%), #fff);
+  }
+  &.mo-btn-link {
+    @include buttonStyle(transparent, transparent, $color-primary, transparent, transparent, darken($color-primary, 10%));
+  } //size
+  &.mo-btn-tiny {
+    @include buttonSize ($form-size-tiny);
+  }
+  &.mo-btn-small {
+    @include buttonSize ($form-size-small);
+  }
+  &.mo-btn-large {
+    @include buttonSize ($form-size-large);
+  } //outline
+  &.mo-btn-outline {
+    @include buttonStyle($color-border, transparent, $color-text, $color-border, $color-border, $color-title);
+  }
+  &.mo-btn-outline--primary {
+    @include buttonStyle($color-primary, transparent, $color-primary, $color-primary, $color-primary, #fff);
+  }
+  &.mo-btn-outline--negative {
+    @include buttonStyle($color-negative, transparent, $color-negative, $color-negative, $color-negative, #fff);
+  }
+  &.mo-btn-outline--positive {
+    @include buttonStyle($color-positive, transparent, $color-positive, $color-positive, $color-positive, #fff);
+  }
+  &:not(.readonly):not([readonly]):not(.disabled):not([disabled]) {
+    &:hover,
+    &:active {
+      text-decoration: none;
+      @if $enable-form-translation {
+        transition: $form-transition;
+      }
     }
-    &.mo-btn-negative {
-        @include buttonStyle($color-negative, $color-negative, #fff, darken($color-negative, 10%), darken($color-negative, 10%), #fff);
+  } //readonly, disabled
+  &.readonly,
+  &[readonly],
+  &.active {
+    cursor: default;
+  }
+  &.disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: $disabled-opacity;
+  }
+  [class^="mo-icon-"],
+  [class*="mo-icon-"] {
+    font-size: 1.5rem;
+    position: relative;
+    line-height: 0;
+    margin-left: -.35rem;
+    margin-right: -.35rem;
+  }
+  &.mo-btn-small {
+    [class^="mo-icon-"],
+    [class*="mo-icon-"] {
+      font-size: 1.25rem;
+      top: .3rem;
     }
-    &.mo-btn-positive {
-        @include buttonStyle($color-positive, $color-positive, #fff, darken($color-positive, 10%), darken($color-positive, 10%), #fff);
-    }
-    &.mo-btn-link {
-        @include buttonStyle(transparent, transparent, $color-primary, transparent, transparent, darken($color-primary, 10%));
-    }
-    //size
-    &.mo-btn-tiny {
-        @include buttonSize ($form-size-tiny);
-    }
-    &.mo-btn-small {
-        @include buttonSize ($form-size-small);
-    }
-    &.mo-btn-large {
-        @include buttonSize ($form-size-large);
-    }
-    //outline
-    &.mo-btn-outline {
-        @include buttonStyle($color-border, transparent, $color-text, $color-border, $color-border, $color-title);
-    }
-    &.mo-btn-outline--primary {
-        @include buttonStyle($color-primary, transparent, $color-primary, $color-primary, $color-primary, #fff);
-    }
-    &.mo-btn-outline--negative {
-        @include buttonStyle($color-negative, transparent, $color-negative, $color-negative, $color-negative, #fff);
-    }
-    &.mo-btn-outline--positive {
-        @include buttonStyle($color-positive, transparent, $color-positive, $color-positive, $color-positive, #fff);
-    }
-    &:not(.readonly):not([readonly]):not(.disabled):not([disabled]) {
-        &:hover, &:active {
-            text-decoration: none;
-            @if $enable-form-translation {
-                transition: $form-transition;
-            }
-        }
-    }
-    //readonly, disabled
-    &.readonly, &[readonly], &.active {
-        cursor: default;
-    }
-    &.disabled, &[disabled] {
-        cursor: not-allowed;
-        opacity: $disabled-opacity;
-    }
-    [class^="mo-icon-"], [class*="mo-icon-"] {
-        font-size: 1.5rem;
-        position: relative;
-        line-height: 0;
-        margin-left: -.35rem;
-        margin-right: -.35rem;
-    }
-    &.mo-btn-small {
-        [class^="mo-icon-"], [class*="mo-icon-"] {
-            font-size: 1.25rem;
-            top: .3rem;
-        }
-    }
+  }
 }
 
 //button groups
 .mo-btns {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  user-select: none;
+  >.mo-btn {
     position: relative;
-    display: inline-flex;
-    vertical-align: middle;
-    user-select: none;
-    >.mo-btn {
-        position: relative;
-        flex: 0 1 auto;
-        margin-bottom: 0;
-        &:hover, &:focus, &:active, &.active {
-            z-index: 2;
-        }
-        &:not(:first-child):not(:last-child) {
-            border-radius: 0;
-        }
-        &:first-child {
-            margin-left: 0;
-            &:not(:last-child) {
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 0;
-            }
-        }
-        &:last-child:not(:first-child) {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-        }
+    flex: 0 1 auto;
+    margin-bottom: 0;
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      z-index: 2;
     }
-    .mo-btn+.mo-btn, .mo-btn+.mo-btns, .mo-btns+.mo-btn, .mo-btns+.mo-btns {
-        margin-left: rem(-1);
+    &:not(:first-child):not(:last-child) {
+      border-radius: 0;
     }
+    &:first-child {
+      margin-left: 0;
+      &:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+    &:last-child:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+  .mo-btn+.mo-btn,
+  .mo-btn+.mo-btns,
+  .mo-btns+.mo-btn,
+  .mo-btns+.mo-btns {
+    margin-left: rem(-1);
+  }
 }
 
 .mo-form-row {
-    padding: 0;
-    margin-left: -1rem;
-    margin-right: -1rem;
-    margin-bottom: 1rem;
+  padding: 0;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  &:last-child {
+    margin-bottom: 0
+  }
+  .mo-form-label {
+    padding: 0 1rem;
+    width: 10%;
+    min-width: 7.5rem;
+    text-align: right;
+    margin-bottom: 0;
     display: flex;
-    flex-wrap: wrap;
-    align-item: center;
-    &:last-child {
-        margin-bottom: 0
+    flex-flow: column;
+    justify-content: center;
+    &.top {
+      justify-content: flex-start;
     }
-    .mo-form-label {
-        padding: 0 1rem;
-        width: 10%;
-        min-width: 7.5rem;
-        text-align: right;
-        margin-bottom: 0;
-        display: flex;
-        flex-flow: column;
-        justify-content: center;
-        &.top {
-            justify-content: flex-start;
-        }
-    }
-    .mo-form-flex {
-        flex-basis: 0;
-        flex-grow: 1;
-        margin-bottom: 0;
-        padding: 0 1rem;
-    }
+  }
+  .mo-form-flex {
+    flex-basis: 0;
+    flex-grow: 1;
+    margin-bottom: 0;
+    padding: 0 1rem;
+  }
 }
 
 @media screen and (max-width:640px) {
-    .mo-form-row {
-        .mo-form-label {
-            margin-bottom: .5rem;
-            text-align: left;
-        }
-        .mo-form-label, .mo-form-flex {
-            flex-basis: 100%;
-        }
+  .mo-form-row {
+    .mo-form-label {
+      margin-bottom: .5rem;
+      text-align: left;
     }
+    .mo-form-label,
+    .mo-form-flex {
+      flex-basis: 100%;
+    }
+  }
 }
