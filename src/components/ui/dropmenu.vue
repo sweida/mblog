@@ -25,6 +25,11 @@ export default {
       this.visible = !this.visible
       this.$emit('input', this.visible)
     }
+  },
+  watch : {
+    value (val) {
+      this.visible = val
+    }
   }
 }
 </script>

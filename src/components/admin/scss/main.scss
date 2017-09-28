@@ -52,6 +52,9 @@
       list-style: none;
       margin: 0;
       padding: 0;
+      ul {
+        box-shadow: 0 -2px 0 rgba(#191f23, .75), 0 -1px 0 rgba(#fff, .05), 0 1px 0 rgba(#191f23, .75), 0 2px 0 rgba(#fff, .05);
+      }
     }
     li {
       a {
