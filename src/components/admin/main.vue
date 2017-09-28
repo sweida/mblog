@@ -31,7 +31,7 @@
       </nav>
     </aside>
     <main class="mb-body">
-   
+      <router-view></router-view>
     </main>
   </div>
 </template>
