@@ -2,7 +2,7 @@
   <div class="login-viewport">
     <form class="login-form">
       <figure class="logo">
-        <img src="../../assets/logo-white.svg" alt="">
+        <img src="../../assets/logo-white.svg" alt="mblog" />
       </figure>
       <div class="form">
         <div class="form-group">
