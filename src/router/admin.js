@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/admin/main'
 import Login from '@/components/admin/login'
+import Dashboard from '@/components/admin/dashboard'
+import Content from '@/components/admin/content/index'
+import Setting from '@/components/admin/setting/index'
 
 
 
@@ -13,7 +16,21 @@ export default new Router({
   base: '/admin',
   routes: [{
     path: '/',
-    component: Main
+    component: Main,
+    children : [
+      {
+        path : 'dashboard',
+        component : Dashboard
+      },
+      {
+        path : 'content',
+        component : Content
+      },
+      {
+        path : 'setting',
+        component : Setting
+      }
+    ]
   }, {
     path: '/login',
     component: Login
