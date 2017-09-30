@@ -55,18 +55,18 @@
         </router-link>
         <ul slot="body">
           <li>
-            <router-link to="/setting/1" class="nav-link-child" exact>
-              <span class="nav-label">页面</span>
+            <router-link to="/setting/base" class="nav-link-child" exact>
+              <span class="nav-label">常规</span>
             </router-link>
           </li>
           <li>
-            <router-link to="/setting/2" class="nav-link-child" exact>
-              <span class="nav-label">文章</span>
+            <router-link to="/setting/upload" class="nav-link-child" exact>
+              <span class="nav-label">上传</span>
             </router-link>
           </li>
           <li>
-            <router-link to="/setting/3" class="nav-link-child" exact>
-              <span class="nav-label">链接</span>
+            <router-link to="/setting/comment" class="nav-link-child" exact>
+              <span class="nav-label">评论</span>
             </router-link>
           </li>
         </ul>

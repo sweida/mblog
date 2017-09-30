@@ -1,8 +1,8 @@
 <template>
   <header class="mb-head">
     <a class="mb-head-toggle" @click="toggle">
-      <mb-icon name="reorder" v-if="!min"></mb-icon>
-      <mb-icon name="error" v-else></mb-icon>
+      <mb-icon name="reorder" v-show="!min"></mb-icon>
+      <mb-icon name="error" v-show="min"></mb-icon>
     </a>
   </header>
 </template>
