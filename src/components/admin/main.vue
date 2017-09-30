@@ -1,84 +1,11 @@
 <template>
-  <div class="mb-container">
-    <header class="mb-head"></header>
+  <div class="mb-container" :class="{'nav-min' : minNav}">
+    <mb-header v-model="minNav"></mb-header>
     <aside class="mb-aside">
       <figure class="mb-logo">
         <img src="../../assets/logo-white.svg" alt="mblog" />
       </figure>
-      <nav class="mb-nav">
-        <ul>
-          <li>
-            <router-link to="/dashboard" class="nav-link">
-              <mb-icon name="home"></mb-icon>
-              <span class="nav-label">仪表盘</span>
-            </router-link to="/dashboard">
-          </li>
-          <mb-dropmenu v-model="contentOpen">
-            <router-link to="/content" slot="toggle" class="nav-link">
-              <mb-icon name="library_books"></mb-icon>
-              <span class="nav-label">内容</span>
-            </router-link>
-            <ul slot="body">
-              <li>
-                <router-link to="/content/page" class="nav-link-child">
-                  <span class="nav-label">页面</span>
-                </router-link>
-              </li>
-              <li>
-                <router-link to="/content/article" class="nav-link-child">
-                  <span class="nav-label">文章</span>
-                </router-link>
-              </li>
-              <li>
-                <router-link to="/content/link" class="nav-link-child">
-                  <span class="nav-label">链接</span>
-                </router-link>
-              </li>
-            </ul>
-          </mb-dropmenu>
-          <li>
-            <router-link to="/comment" class="nav-link">
-              <mb-icon name="speaker"></mb-icon>
-              <span class="nav-label">评论</span>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/user" class="nav-link">
-              <mb-icon name="people"></mb-icon>
-              <span class="nav-label">用户</span>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/theme" class="nav-link">
-              <mb-icon name="palette"></mb-icon>
-              <span class="nav-label">主题</span>
-            </router-link>
-          </li>
-          <mb-dropmenu v-model="settingOpen">
-            <router-link to="/setting" slot="toggle" class="nav-link">
-              <mb-icon name="settings"></mb-icon>
-              <span class="nav-label">设置</span>
-            </router-link>
-            <ul slot="body">
-              <li>
-                <router-link to="/setting/1" class="nav-link-child" exact>
-                  <span class="nav-label">页面</span>
-                </router-link>
-              </li>
-              <li>
-                <router-link to="/setting/2" class="nav-link-child" exact>
-                  <span class="nav-label">文章</span>
-                </router-link>
-              </li>
-              <li>
-                <router-link to="/setting/3" class="nav-link-child" exact>
-                  <span class="nav-label">链接</span>
-                </router-link>
-              </li>
-            </ul>
-          </mb-dropmenu>
-        </ul>
-      </nav>
+      <mb-nav></mb-nav>
     </aside>
     <main class="mb-body">
       <router-view></router-view>
@@ -86,30 +13,22 @@
   </div>
 </template>
 <script>
-import MbDropmenu from '../ui/dropmenu'
 import MbIcon from '../ui/icon'
+import MbHeader from './common/header'
+import MbNav from './common/nav'
 
 export default {
   name: 'admin-main',
   components: {
-    MbDropmenu,
-    MbIcon
+    MbIcon,
+    MbHeader,
+    MbNav
   },
   data() {
     return {
-      contentOpen: false,
-      settingOpen: false
+      minNav: false
     }
   },
-  mounted() {
-    const path = this.$route.path
-    if (/\/content/.test(path)) {
-      this.contentOpen = true
-    }
-    if (/\/setting/.test(path)) {
-      this.settingOpen = true
-    }
-  }
 }
 </script>
 
