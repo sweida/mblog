@@ -39,17 +39,6 @@
   }
 }
 
-@media screen and (max-width: 800px) {
-  .mb-container {
-    >.mb-head {
-      padding-left: 0;
-    }
-    >.mb-aside {
-      transform: translate3d(rem(-240), 0, 0);
-    }
-  }
-}
-
 .mb-aside {
   display: flex;
   flex-flow: column;

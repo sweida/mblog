@@ -29,6 +29,17 @@ export default {
       minNav: false
     }
   },
+  methods: {
+    resize(event) {
+      this.minNav = !!(window.innerWidth <= 1000)
+    }
+  },
+  mounted() {
+    window.addEventListener('resize', this.resize)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resize)
+  }
 }
 </script>
 

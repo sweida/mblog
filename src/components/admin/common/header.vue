@@ -1,7 +1,8 @@
 <template>
   <header class="mb-head">
     <a class="mb-head-toggle" @click="toggle">
-      <mb-icon name="reorder"></mb-icon>
+      <mb-icon name="reorder" v-if="!min"></mb-icon>
+      <mb-icon name="error" v-else></mb-icon>
     </a>
   </header>
 </template>
@@ -27,6 +28,11 @@ export default {
     toggle() {
       this.min = !this.min
       this.$emit('input', this.min)
+    }
+  },
+  watch: {
+    value(val) {
+      this.min = val
     }
   }
 }
