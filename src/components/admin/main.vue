@@ -3,7 +3,7 @@
     <header class="mb-head"></header>
     <aside class="mb-aside">
       <figure class="mb-logo">
-        <!-- <img src="../../assets/logo-white.svg" alt="mblog" /> -->
+        <img src="../../assets/logo-white.svg" alt="mblog" />
       </figure>
       <nav class="mb-nav">
         <ul>
@@ -30,7 +30,7 @@
                 </router-link>
               </li>
               <li>
-                <router-link to="/content/links" class="nav-link-child">
+                <router-link to="/content/link" class="nav-link-child">
                   <span class="nav-label">链接</span>
                 </router-link>
               </li>
