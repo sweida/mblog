@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './components/admin.vue'
 import router from './router/admin'
+import VueResource from 'vue-resource'
+
+Vue.use(VueResource)
 
 Vue.config.productionTip = false
 

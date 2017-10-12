@@ -15,6 +15,11 @@ import Page from '@/components/admin/content/page'
 import Link from '@/components/admin/content/link'
 
 
+import SetGeneral from '@/components/admin/setting/general'
+import SetUpload from '@/components/admin/setting/upload'
+import SetMail from '@/components/admin/setting/mail'
+import SetComment from '@/components/admin/setting/comment'
+
 Vue.use(Router)
 
 export default new Router({
@@ -24,6 +29,7 @@ export default new Router({
   routes: [{
     path: '/',
     component: Main,
+    redirect: '/dashboard',
     children: [{
         path: 'dashboard',
         component: Dashboard
@@ -42,6 +48,7 @@ export default new Router({
       {
         path: 'content',
         component: Content,
+        redirect: '/content/article',
         children: [{
           path: 'article',
           component: Article
@@ -55,7 +62,21 @@ export default new Router({
       },
       {
         path: 'setting',
-        component: Setting
+        component: Setting,
+        redirect: '/setting/general',
+        children: [{
+          path: 'general',
+          component: SetGeneral
+        }, {
+          path: 'upload',
+          component: SetUpload
+        }, {
+          path: 'mail',
+          component: SetMail
+        }, {
+          path: 'comment',
+          component: SetComment
+        }]
       }
     ]
   }, {

@@ -55,13 +55,18 @@
         </router-link>
         <ul slot="body">
           <li>
-            <router-link to="/setting/base" class="nav-link-child" exact>
+            <router-link to="/setting/general" class="nav-link-child" exact>
               <span class="nav-label">常规</span>
             </router-link>
           </li>
           <li>
             <router-link to="/setting/upload" class="nav-link-child" exact>
               <span class="nav-label">上传</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/setting/mail" class="nav-link-child" exact>
+              <span class="nav-label">邮件</span>
             </router-link>
           </li>
           <li>
@@ -89,14 +94,17 @@ export default {
       settingOpen: false
     }
   },
+  methods: {
+    toggleRoute(path) {
+      this.contentOpen = !!/\/content/.test(path)
+      this.settingOpen = !!/\/setting/.test(path)
+    }
+  },
   mounted() {
-    const path = this.$route.path
-    if (/\/content/.test(path)) {
-      this.contentOpen = true
-    }
-    if (/\/setting/.test(path)) {
-      this.settingOpen = true
-    }
+    this.toggleRoute(this.$route.path)
+  },
+  watch: {
+    $route(to, from) { }
   }
 }
 </script>

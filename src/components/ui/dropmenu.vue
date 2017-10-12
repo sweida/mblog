@@ -11,23 +11,23 @@
 
 <script>
 export default {
-  name : 'mb-dropmenu',
-  props : {
-    value : Boolean,
+  name: 'mb-dropmenu',
+  props: {
+    value: Boolean,
   },
-  data () {
+  data() {
     return {
-      visible : this.value
+      visible: this.value
     }
   },
-  methods : {
-    toggle () {
+  methods: {
+    toggle() {
       this.visible = !this.visible
       this.$emit('input', this.visible)
     }
   },
-  watch : {
-    value (val) {
+  watch: {
+    value(val) {
       this.visible = val
     }
   }
@@ -35,18 +35,18 @@ export default {
 </script>
 
 <style lang="scss">
-  .mb-dropmenu {
-    position: relative;
-    > .mb-dropmenu-toggle {
+.mb-dropmenu {
+  position: relative;
+  >.mb-dropmenu-toggle {
+    display: block;
+  }
+  >.mb-dropmenu-body {
+    display: none;
+  }
+  &.mb-dropmenu--open {
+    >.mb-dropmenu-body {
       display: block;
     }
-    > .mb-dropmenu-body {
-      display: none;
-    }
-    &.mb-dropmenu--open {
-      > .mb-dropmenu-body {
-        display: block;
-      }
-    }
   }
+}
 </style>

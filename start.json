@@ -1,0 +1,15 @@
+{
+  "apps": [{
+    "name": "moblogApi",
+    "script": "server.js",
+    "watch": true,
+    "cwd": "./",
+    "log_date_format": "YYYY-MM-DD HH:mm:ss",
+    "watch_options": {
+      "cwd": "./server/"
+    },
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }]
+}

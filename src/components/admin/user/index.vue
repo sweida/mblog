@@ -1,5 +1,5 @@
 <template>
-  <div class="app-viewport">
+  <div class="mb-viewport">
   </div>
 </template>
 <script>
