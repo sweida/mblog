@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     save() {
-      this.$http.put('/api/setting/batch', { key: 'general', value: this.fd })
+      this.$http.put('/api/setting', { key: 'general', value: this.fd })
         .then(({ body }) => {
           if (body.code === 200) {
             this.$parent.data.general = body.data.general

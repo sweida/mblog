@@ -126,7 +126,7 @@ export default {
   },
   methods: {
     save() {
-      this.$http.put('/api/setting/batch', { key: 'upload', value: this.fd })
+      this.$http.put('/api/setting', { key: 'upload', value: this.fd })
         .then(({ body }) => {
           if (body.code === 200) {
             for (let k in body.data) {

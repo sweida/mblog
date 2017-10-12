@@ -14,12 +14,11 @@ module.exports = router => {
   router
     .get('/', (req, res) => res.status(404).send('Bad Request'))
 
-  //use token
+
   router
     .get('/setting/', Setting.getAll)
-    .put('/setting/batch', Setting.batch)
-    .put('/setting/:key([a-fA-F]{2,24})', Setting.update)
-    .post('/setting', Setting.add)
+    .put('/setting/', Setting.update)
+
 
     .put('/script/run', Script.run)
 
