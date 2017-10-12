@@ -5,6 +5,7 @@ const year = today.getFullYear() === 2017 ? '2017' : `2017-${today.getFullYear()
 export default {
   general: {
     title: '',
+    keyword: 'smohan, mblog',
     description: '低调的使用mblog',
     lang: 'zh',
     copyright: `Copyright © ${year} mblog. All Rights Reserved`,

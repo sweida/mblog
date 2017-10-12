@@ -28,6 +28,21 @@
         <div class="mo-form-row">
           <label class="mo-form-label">
             <span>
+              <sub class="mo-text-negative">*&nbsp;</sub>站点关键词</span>
+          </label>
+          <div class="mo-form-flex">
+            <div class="mo-row">
+              <div class="mo-cell-7">
+                <textarea class="mo-input" rows="3" v-model="fd.keyword" spellcheck="false"></textarea>
+              </div>
+              <div class="mo-cell-5">&nbsp;</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mo-form-row">
+          <label class="mo-form-label">
+            <span>
               <sub class="mo-text-negative">*&nbsp;</sub>站点描述</span>
           </label>
           <div class="mo-form-flex">
