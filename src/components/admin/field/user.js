@@ -24,6 +24,42 @@ export default {
         update: '编辑',
         view: '查看',
       }
+    },
+    page: {
+      name: '页面',
+      data: {
+        add: '新增',
+        remove: '删除',
+        update: '编辑',
+        view: '查看',
+      }
+    },
+    categroy: {
+      name: '分类',
+      data: {
+        add: '新增',
+        remove: '删除',
+        update: '编辑',
+        view: '查看',
+      }
+    },
+    tag: {
+      name: '标签',
+      data: {
+        add: '新增',
+        remove: '删除',
+        update: '编辑',
+        view: '查看',
+      }
+    },
+    link: {
+      name: '链接',
+      data: {
+        add: '新增',
+        remove: '删除',
+        update: '编辑',
+        view: '查看',
+      }
     }
   }
 }

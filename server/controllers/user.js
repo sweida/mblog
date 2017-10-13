@@ -8,6 +8,9 @@
 const U = require('../utils/')
 const R = require('../utils/result')
 const V = require('../utils/validate')
+const T = require('../utils/token')
+const C = require('../config/index')['token']
+const G = require('short-id-gen')
 const Task = require('../utils/task')
 const User = require('../models/user')
 
@@ -339,4 +342,95 @@ exports.remove = async(req, res) => {
     })
     .then(doc => res.json(doc ? R.success() : R.error(404, 'user not found')))
     .catch(error => res.json(R.error(500, error.message)))
+}
+
+
+/**
+ * 管理员登录
+ * @param  {Object} req  
+ * @param  {Object} res  
+ * @return {Object}  
+ */
+exports.adminLogin = async(req, res) => {
+  const request = req.body
+  const validate = {
+    email: {
+      rules: 'require|email',
+    },
+    password: {
+      rules: 'require|between[6, 20]',
+    }
+  }
+
+  const result = V.validate(request, validate, ['email', 'password'])
+
+  if (!result.passed)
+    return res.json(R.error(402, result.msg))
+
+  const post = result.data
+
+  const user = await User.findOne({
+    email: post.email,
+    deleted: false
+  })
+
+  //not found
+  if (!user)
+    return res.json(R.error(404, 'user not found'))
+
+  //password error	
+  if (!user.comparePassword(post.password))
+    return res.json(R.error(402, 'password error'))
+
+  //普通用户禁止访问
+  if (user.role === 1)
+    return res.json(R.error(407))
+
+
+  //account disabled
+  if (user.enabled === false)
+    return res.json(R.error(406))
+
+
+  const userData = Object.create(null)
+  userData.id = user._id
+  userData.nick = user.nick
+  userData.email = user.email
+  userData.avatar = user.avatar
+  userData.role = user.role
+  userData.jurisdiction = user.jurisdiction
+  userData.lastLogin = user.lastLogin
+
+  const authToken = G.generate(32)
+  const signToken = await T.sign({
+    id: user._id,
+    role: user.role,
+    jurisdiction: JSON.stringify(user.jurisdiction),
+    authToken
+  }, C.admin.secret)
+
+  //存储登录token信息
+  res.cookie(C.admin.key, signToken, {
+    httpOnly: true,
+    expires: new Date(Date.now() + 24 * 3600 * 1000)
+  })
+
+  const lastLogin = {
+    time: Date.now(),
+    location: await Task.getCity(req),
+    userAgent: Task.getUserAgent(req)
+  }
+
+  await User.update({
+    _id: user._id
+  }, {
+    $set: {
+      lastLogin
+    }
+  })
+
+  return res.json(R.success({
+    token: authToken,
+    data: userData
+  }))
 }

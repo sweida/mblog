@@ -5,11 +5,15 @@
  * Date: 2017/10/12 
  */
 
-
+const {
+  verifyAdminToken,
+  verifyJurisdiction
+} = require('../utils/auth')
 const Script = require('../controllers/script')
 const Setting = require('../controllers/setting')
 
 const User = require('../controllers/user')
+const Category = require('../controllers/category')
 
 
 
@@ -20,20 +24,26 @@ module.exports = router => {
 
 
   router
-    .get('/setting/', Setting.getAll)
-    .put('/setting/', Setting.update)
+    .get('/setting/', verifyAdminToken, Setting.getAll)
+    .put('/setting/', verifyAdminToken, Setting.update)
 
 
-    .put('/script/run', Script.run)
+    .put('/script/run', verifyAdminToken, Script.run)
 
 
-    .get('/user/list/', User.getList)
-    .post('/user/', User.add)
-    .get('/user/:id([0-9a-fA-F]{24})', User.getOne)
-    .put('/user/:id([0-9a-fA-F]{24})', User.update)
-    .put('/user/password/:id([0-9a-fA-F]{24})', User.updatePassword)
-    .put('/user/enabled/:id([0-9a-fA-F]{24})', User.updateEnabled)
-    .delete('/user/:id([0-9a-fA-F]{24})', User.remove)
+    .post('/user/admin/login', User.adminLogin)
+    .get('/user/list/', verifyAdminToken, verifyJurisdiction('user-view'), User.getList)
+    .get('/user/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('user-view'), User.getOne)
+    .post('/user/', verifyAdminToken, verifyJurisdiction('user-add'), User.add)
+    .put('/user/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('user-update'), User.update)
+    .put('/user/password/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('user-update'), User.updatePassword)
+    .put('/user/enabled/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('user-update'), User.updateEnabled)
+    .delete('/user/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('user-remove'), User.remove)
+
+
+    .get('/category/list/', verifyAdminToken, verifyJurisdiction('category-view'), Category.getList)
+    .post('/category/', verifyAdminToken, verifyJurisdiction('category-add'), Category.add)
+  //.get('/category/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('user-view'), User.getOne)
 
 
 

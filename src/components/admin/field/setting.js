@@ -4,7 +4,7 @@ const year = today.getFullYear() === 2017 ? '2017' : `2017-${today.getFullYear()
 
 export default {
   general: {
-    title: '',
+    title: 'MBlog',
     subtitle: '使用mblog创建的站点',
     keyword: 'smohan, mblog',
     description: '低调的使用mblog',

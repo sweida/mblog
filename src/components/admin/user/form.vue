@@ -221,7 +221,7 @@ export default {
       this.getUserInfo()
     }
     this.breadcrumb.push({
-      name: this.id ? '编辑用户信息' : '添加新用户'
+      name: this.id ? `编辑用户信息` : '添加新用户'
     })
   }
 }

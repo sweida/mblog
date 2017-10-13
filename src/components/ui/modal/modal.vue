@@ -44,16 +44,16 @@
 		position: relative;
 		text-align: left;
 		>.mo-modal__header {
-			padding: rem(20 20 0);
+			padding: rem(30 30 0);
 			line-height: 1;
 			user-select: none;
 		}
 		>.mo-modal__body {
-			padding: rem(30 20);
+			padding: rem(30 30);
 			overflow: auto;
 		}
 		>.mo-modal__footer {
-			padding: rem(0 20 20);
+			padding: rem(0 30 30);
 			text-align: right;
 			user-select: none;
 		}

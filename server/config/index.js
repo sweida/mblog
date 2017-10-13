@@ -35,7 +35,17 @@ const config = {
     database: 'moblog',
     user: '',
     password: '',
-  }
+  },
+  token: {
+    user: {
+      key: 'mblog_user_token',
+      secret: '3MEWSfVKSG4W8wO2Ki2gmOYUae2mIWqG'
+    },
+    admin: {
+      key: 'mblog_admin_token',
+      secret: 'fgSB4CdK4kUCWCUwQ8ACIEUykWqWQCIA'
+    },
+  },
 }
 
 for (let k in userSetting) {

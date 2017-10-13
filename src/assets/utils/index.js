@@ -79,20 +79,47 @@ const decodeHtml = string => {
  * @return {[type]}
  */
 const arrayToTree = (data = [], idKey = '_id', parentKey = 'parent', childrenKey = 'children') => {
-  let map = {},
-    roots = [],
-    node;
-  for (let i = 0, len = data.length; i < len; i += 1) {
-    node = data[i]
-    node[childrenKey] = []
-    map[node[idKey]] = i
-    if (node[parentKey]) {
-      data[map[node[parentKey]]][childrenKey].push(node)
-    } else {
-      roots.push(node)
+  let tree = [],
+    mappedArr = {},
+    arrElem,
+    mappedElem;
+
+  for (let i = 0, len = data.length; i < len; i++) {
+    arrElem = data[i]
+    mappedArr[arrElem[idKey]] = arrElem
+    mappedArr[arrElem[idKey]][childrenKey] = []
+  }
+  for (let id in mappedArr) {
+    if (mappedArr.hasOwnProperty(id)) {
+      mappedElem = mappedArr[id]
+      if (mappedElem[parentKey]) {
+        mappedArr[mappedElem[parentKey]][childrenKey].push(mappedElem)
+      } else {
+        tree.push(mappedElem)
+      }
     }
   }
-  return roots
+  return tree
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 const MonthlyAbbrs = ['Jan', 'Feb', 'Mar', 'Apr', 'may', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']

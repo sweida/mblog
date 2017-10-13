@@ -205,3 +205,13 @@
     font-size: 14px;
   }
 }
+
+.mb-modal-form-row {
+  margin-bottom: 1rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .mb-modal-form-label {
+    padding-top: .2rem;
+  }
+}

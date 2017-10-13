@@ -24,16 +24,6 @@ import SetComment from '@/components/admin/setting/comment'
 
 import UserFrom from '@/components/admin/user/form'
 
-
-
-
-
-
-
-
-
-
-
 Vue.use(Router)
 
 export default new Router({

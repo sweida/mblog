@@ -38,6 +38,10 @@ const ERROR_MAP = {
     type: 'PERMISSION DENIED',
     message: 'The account does not have access to operations'
   },
+  408: {
+    type: 'No API PERMISSIONS',
+    message: 'The account does not have permission to access this API'
+  },
   // ...
   499: {
     type: 'TOKEN INVALID',
