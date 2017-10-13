@@ -27,7 +27,13 @@ module.exports = router => {
     .put('/script/run', Script.run)
 
 
+    .get('/user/list/', User.getList)
     .post('/user/', User.add)
+    .get('/user/:id([0-9a-fA-F]{24})', User.getOne)
+    .put('/user/:id([0-9a-fA-F]{24})', User.update)
+    .put('/user/password/:id([0-9a-fA-F]{24})', User.updatePassword)
+    .put('/user/enabled/:id([0-9a-fA-F]{24})', User.updateEnabled)
+    .delete('/user/:id([0-9a-fA-F]{24})', User.remove)
 
 
 

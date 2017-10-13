@@ -3,8 +3,12 @@
     <mb-breadcrumb :links="breadcrumb"></mb-breadcrumb>
     <div class="mb-panel">
       <div class="mb-panel-head mo-row">
-        <h3 class="mo-cell">用户</h3>
+        <h3 class="mo-cell">
+          <template v-if="!id">添加新用户</template>
+          <template v-else>编辑用户信息（{{fd.nick}}）</template>
+        </h3>
         <div class="mo-cell mo-text-right">
+          <router-link class="mo-btn mo-btn-link" to="/user/" exact>返回</router-link>
           <mb-submit v-model="committing" :click="save"></mb-submit>
         </div>
       </div>
@@ -36,7 +40,7 @@
           </div>
         </div>
 
-        <div class="mo-form-row">
+        <div class="mo-form-row" v-if="!id">
           <label class="mo-form-label">密码</span>
           </label>
           <div class="mo-form-flex">
@@ -49,7 +53,7 @@
           </div>
         </div>
 
-        <div class="mo-form-row">
+        <div class="mo-form-row" v-if="!id">
           <label class="mo-form-label">确认密码</span>
           </label>
           <div class="mo-form-flex">
@@ -106,7 +110,7 @@
                   <span>管理员</span>
                 </label>
                 <label class="mo-radio">
-                  <input type="radio" name="role" value="101" v-model="fd.role" />
+                  <input type="radio" name="role" value="200" v-model="fd.role" />
                   <span class="icon"></span>
                   <span>超级管理员</span>
                 </label>
@@ -144,7 +148,7 @@
 import mbSubmit from '@/components/ui/submit'
 import mbBreadcrumb from '@/components/ui/breadcrumb'
 import fields from '../field/user'
-import { extend } from '@/assets/utils/'
+import { isObjectId, extend } from '@/assets/utils/'
 export default {
   name: 'mb-user-form',
   components: {
@@ -152,36 +156,73 @@ export default {
     mbBreadcrumb
   },
   data() {
+    let id = this.$route.params.id
+    id = isObjectId(id) ? id : null
     return {
       breadcrumb: [
         {
           url: '/user/',
           name: '用户'
-        },
-        {
-          name: '新增'
         }
       ],
       committing: false,
       fd: extend({}, fields.fields),
-      jurisdiction: fields.jurisdiction
+      jurisdiction: fields.jurisdiction,
+      id
     }
   },
   methods: {
     save() {
-      this.$http.post('/api/user/', this.fd)
+      const method = this.id ? 'put' : 'post'
+      const url = this.id ? `/api/user/${this.id}` : '/api/user'
+      const self = this
+      this.$http[method](url, this.fd)
+        .then(
+        ({ body }) => {
+          if (body.code === 200) {
+            this.$layer.toast('保存成功', 3000, {
+              cancel() {
+                self.$router.push('/user')
+              }
+            })
+          } else {
+            this.$layer.toast(body.message)
+            this.committing = false
+          }
+        })
+        .catch(e => {
+          this.$layer.toast(e.statusText)
+          this.committing = false
+        })
+    },
+    getUserInfo() {
+      const self = this
+      this.fd.password2 = ''
+      this.$http.get(`/api/user/${this.id}`)
         .then(({ body }) => {
           if (body.code === 200) {
-            this.fd.password = this.fd.password2 = ''
+            for (let key in this.fd) {
+              if (body.data[key]) {
+                this.fd[key] = body.data[key]
+              }
+            }
           } else {
-
+            this.$layer.toast(body.message, 2000, {
+              cancel() {
+                self.$router.push('/user/')
+              }
+            })
           }
-          setTimeout(() => { this.committing = false }, 1000)
         })
     }
   },
   mounted() {
-
+    if (this.id) {
+      this.getUserInfo()
+    }
+    this.breadcrumb.push({
+      name: this.id ? '编辑用户信息' : '添加新用户'
+    })
   }
 }
 </script>

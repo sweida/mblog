@@ -27,7 +27,7 @@ const UserSchema = new Schema({
   role: {
     type: Number,
     default: 1,
-    //{1 : user, 100 : admin , 101: superAdmin}
+    //{1 : user, 100 : admin , 200: superAdmin}
     required: true
   },
   //权限

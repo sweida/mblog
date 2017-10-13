@@ -101,6 +101,10 @@ export default new Router({
       {
         path: 'user/new',
         component: UserFrom
+      },
+      {
+        path: 'user/:id',
+        component: UserFrom
       }
     ]
   }, {
