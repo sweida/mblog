@@ -25,7 +25,9 @@
                 <td>
                   <span v-if="item.isChild" class="mo-text-hint">---- </span>{{item.name}}</td>
                 <td>{{item.alias}}</td>
-                <td>{{item.description}}</td>
+                <td>
+                  <div class="td-description mo-text-overflow" v-text="item.description"></div>
+                </td>
                 <td align="center"><input type="number" class="mo-input input-inline input-number" v-model="item.order"></td>
                 <td align="right">
                   <div class="mo-btns">
@@ -158,7 +160,7 @@ export default {
       this.$http[method](url, this.fd)
         .then(({ body }) => {
           if (body.code === 200) {
-            this.$layer.toast('保存成功')
+            this.$layer.toast('保存成功', 1000)
             this.getList()
             this.closeModal()
           } else {

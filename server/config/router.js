@@ -15,6 +15,8 @@ const Setting = require('../controllers/setting')
 const User = require('../controllers/user')
 const Category = require('../controllers/category')
 
+const Tag = require('../controllers/tag')
+
 
 
 module.exports = router => {
@@ -45,7 +47,13 @@ module.exports = router => {
     .post('/category/', verifyAdminToken, verifyJurisdiction('category-add'), Category.add)
     .put('/category/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('category-update'), Category.update)
     .delete('/category/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('category-remove'), Category.remove)
-  //.get('/category/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('user-view'), User.getOne)
+
+
+    .get('/tag/list/', verifyAdminToken, verifyJurisdiction('tag-view'), Tag.getList)
+    .post('/tag/', verifyAdminToken, verifyJurisdiction('tag-add'), Tag.add)
+    .put('/tag/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('tag-update'), Tag.update)
+    .delete('/tag/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('tag-remove'), Tag.remove)
+  
 
 
 

@@ -27,11 +27,8 @@ const CategorySchema = new Schema({
     type: Number,
     default: 1
   },
-  //是否删除
-  deleted: {
-    type: Boolean,
-    default: false
-  },
+  //冗余字段，用于保存文章ID，便于统计当前分类下文章数量
+  articles: Array,
 }, {
   connection: TABLE_NAME,
   versionKey: false

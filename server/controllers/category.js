@@ -11,9 +11,6 @@ const V = require('../utils/validate')
 const Category = require('../models/category')
 
 
-
-
-
 /**
  * 获取全部分类列表
  * @param {Object} req
@@ -21,12 +18,8 @@ const Category = require('../models/category')
  * @return {Object} 
  */
 exports.getList = async(req, res) => {
-  const query = {
-    deleted: false
-  }
-  const fields = {
-    deleted: 0,
-  }
+  const query = {}
+  const fields = {}
   const sort = {
     order: -1,
     _id: 1
@@ -64,8 +57,7 @@ exports.add = async(req, res) => {
 
   const post = result.data
   const nameDoc = await Category.findOne({
-    name: post.name,
-    deleted: false
+    name: post.name
   }, {
     _id: 1
   })
@@ -76,8 +68,7 @@ exports.add = async(req, res) => {
   //如果设置了别名，需要检查别名是否有效
   if (post.alias) {
     const aliasDoc = await Category.findOne({
-      alias: post.alias,
-      deleted: false
+      alias: post.alias
     }, {
       _id: 1
     })
@@ -87,8 +78,7 @@ exports.add = async(req, res) => {
 
   if (post.parent) {
     const parentDoc = await Category.findOne({
-      _id: post.parent,
-      deleted: false
+      _id: post.parent
     }, {
       _id: 1
     })
@@ -107,7 +97,6 @@ exports.add = async(req, res) => {
     })))
     .catch(error => res.json(R.error(500, error.message)))
 }
-
 
 
 /**
@@ -136,21 +125,12 @@ exports.update = async(req, res) => {
   if (!result.passed)
     return res.json(R.error(402, result.msg))
 
-  const category = await Category.findOne({
-    _id: id,
-    deleted: false
-  })
-
-  if (!category)
-    return res.json(R.error(404, 'the category not found'))
-
 
   const post = result.data
 
   //检查是否由重名类别
   const nameDoc = await Category.findOne({
     name: post.name,
-    deleted: false,
     _id: {
       $ne: id
     }
@@ -165,7 +145,6 @@ exports.update = async(req, res) => {
   if (post.alias) {
     const aliasDoc = await Category.findOne({
       alias: post.alias,
-      deleted: false,
       _id: {
         $ne: id
       }
@@ -178,8 +157,7 @@ exports.update = async(req, res) => {
 
   if (post.parent) {
     const parentDoc = await Category.findOne({
-      _id: post.parent,
-      deleted: false
+      _id: post.parent
     }, {
       _id: 1
     })
@@ -199,10 +177,6 @@ exports.update = async(req, res) => {
     .then(doc => res.json(R.success(doc)))
     .catch(error => res.json(R.error(500, error.message)))
 }
-
-
-
-
 
 
 /**
@@ -231,14 +205,9 @@ exports.remove = async(req, res) => {
   //设置分类下属文章的分类为未分类
 
   //删除该分类
-  await Category.findOneAndUpdate({
+  await Category.remove({
       _id: id
-    }, {
-      $set: {
-        deleted: true
-      }
     })
     .then(doc => res.json(doc ? R.success() : R.error(404, 'category not found')))
     .catch(error => res.json(R.error(500, error.message)))
-
 }

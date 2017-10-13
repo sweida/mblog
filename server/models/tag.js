@@ -23,12 +23,6 @@ const CategorySchema = new Schema({
     type: Number,
     default: 1
   },
-
-  //是否删除
-  deleted: {
-    type: Boolean,
-    default: false
-  },
 }, {
   connection: TABLE_NAME,
   versionKey: false
