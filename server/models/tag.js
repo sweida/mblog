@@ -10,9 +10,7 @@ const TABLE_NAME = 'Tag'
 const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 
-
-
-const CategorySchema = new Schema({
+const TagSchema = new Schema({
   name: {
     type: String,
     unique: true,
@@ -29,4 +27,4 @@ const CategorySchema = new Schema({
 })
 
 
-module.exports = mongoose.model(TABLE_NAME, CategorySchema)
+module.exports = mongoose.model(TABLE_NAME, TagSchema)
