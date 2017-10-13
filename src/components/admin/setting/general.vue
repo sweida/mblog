@@ -11,9 +11,7 @@
       <div class="mb-panel-body">
 
         <div class="mo-form-row">
-          <label class="mo-form-label">
-            <span>
-              <sub class="mo-text-negative">*&nbsp;</sub>站点标题</span>
+          <label class="mo-form-label">站点标题</span>
           </label>
           <div class="mo-form-flex">
             <div class="mo-row">
@@ -26,10 +24,19 @@
         </div>
 
         <div class="mo-form-row">
-          <label class="mo-form-label">
-            <span>
-              <sub class="mo-text-negative">*&nbsp;</sub>站点关键词</span>
-          </label>
+          <label class="mo-form-label">站点副标题</label>
+          <div class="mo-form-flex">
+            <div class="mo-row">
+              <div class="mo-cell-7">
+                <input type="text" class="mo-input" maxlength="40" v-model="fd.subtitle" spellcheck="false" />
+              </div>
+              <div class="mo-cell-5">&nbsp;</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mo-form-row">
+          <label class="mo-form-label top">站点关键词</label>
           <div class="mo-form-flex">
             <div class="mo-row">
               <div class="mo-cell-7">
@@ -41,10 +48,7 @@
         </div>
 
         <div class="mo-form-row">
-          <label class="mo-form-label">
-            <span>
-              <sub class="mo-text-negative">*&nbsp;</sub>站点描述</span>
-          </label>
+          <label class="mo-form-label top">站点描述</label>
           <div class="mo-form-flex">
             <div class="mo-row">
               <div class="mo-cell-7">
@@ -56,10 +60,7 @@
         </div>
 
         <div class="mo-form-row">
-          <label class="mo-form-label">
-            <span>
-              <sub class="mo-text-negative">*&nbsp;</sub>语言</span>
-          </label>
+          <label class="mo-form-label">语言</label>
           <div class="mo-form-flex">
             <div class="mo-row">
               <div class="mo-cell-7">
@@ -73,14 +74,51 @@
         </div>
 
         <div class="mo-form-row">
-          <label class="mo-form-label">
-            <span>
-              <sub class="mo-text-negative">*&nbsp;</sub>版权信息</span>
-          </label>
+          <label class="mo-form-label">每页显示</label>
           <div class="mo-form-flex">
             <div class="mo-row">
               <div class="mo-cell-7">
-                <textarea class="mo-input" rows="3" v-model="fd.copyright" spellcheck="false"></textarea>
+                <input type="number" class="mo-input input-inline input-number" v-model="fd.pageSize">&nbsp;&nbsp;篇文章
+              </div>
+              <div class="mo-cell-5">&nbsp;</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mo-form-row">
+          <label class="mo-form-label">浏览器标题方案</label>
+          <div class="mo-form-flex">
+            <div class="mo-row">
+              <div class="mo-cell-7">
+                <select class="mo-input" v-model="fd.titleType">
+                  <option value="1">文章标题</option>
+                  <option value="2">站点标题</option>
+                  <option value="3">文章标题 - 站点标题</option>
+                </select>
+              </div>
+              <div class="mo-cell-5">&nbsp;</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mo-form-row">
+          <label class="mo-form-label">ICP备案号</label>
+          <div class="mo-form-flex">
+            <div class="mo-row">
+              <div class="mo-cell-7">
+                <input type="text" class="mo-input" v-model="fd.icp">
+              </div>
+              <div class="mo-cell-5">&nbsp;</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mo-form-row">
+          <label class="mo-form-label">版权信息</label>
+          <div class="mo-form-flex">
+            <div class="mo-row">
+              <div class="mo-cell-7">
+                <input type="text" class="mo-input" v-model="fd.copyright">
               </div>
               <div class="mo-cell-5">&nbsp;</div>
             </div>

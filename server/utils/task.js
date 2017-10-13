@@ -4,13 +4,15 @@ const C = require('../config')
 const V = require('../utils/validate')
 
 const Mail = C.mail
-const BaiduSeo = C.baidu.seo
 
 
 
-const getIp = req => {
-  return req.headers["X-Forwarded-For"] || req.headers["x-forwarded-for"] || (req.rawHeaders && req.rawHeaders['X-Forwarded-For']) || req.connection.remoteAddress
-}
+const getIp = req => req.headers["X-Forwarded-For"] || req.headers["x-forwarded-for"] || (req.rawHeaders && req.rawHeaders['X-Forwarded-For']) || req.connection.remoteAddress
+
+const getUserAgent = req => req.headers['user-agent']
+
+
+exports.getUserAgent = getUserAgent
 
 
 /**
@@ -81,66 +83,5 @@ exports.sendEmail = (email, subject, html) => {
         resolve(info)
       }
     })
-  })
-}
-
-
-/**
- * 添加百度推送
- * @param  {String} urls 链接
- * @return  
- */
-exports.seoPush = urls => {
-  const url = `http://data.zz.baidu.com/urls?site=${BaiduSeo.site}&token=${BaiduSeo.token}`
-  request.post({
-    url,
-    headers: {
-      'Content-Type': 'text/plain'
-    },
-    body: urls
-  }, (error, response, body) => {
-    if (error) {
-      console.log('百度推送失败')
-    }
-  })
-}
-
-/**
- * 更新百度推送
- * @param  {String} urls 链接
- * @return  
- */
-exports.seoUpdate = urls => {
-  const url = `http://data.zz.baidu.com/update?site=${BaiduSeo.site}&token=${BaiduSeo.token}`
-  request.post({
-    url,
-    headers: {
-      'Content-Type': 'text/plain'
-    },
-    body: urls
-  }, (error, response, body) => {
-    if (error) {
-      console.log('百度更新失败')
-    }
-  })
-}
-
-/**
- * 删除百度推送
- * @param  {String} urls 链接
- * @return  
- */
-exports.seoDelete = urls => {
-  const url = `http://data.zz.baidu.com/del?site=${BaiduSeo.site}&token=${BaiduSeo.token}`
-  request.post({
-    url,
-    headers: {
-      'Content-Type': 'text/plain'
-    },
-    body: urls
-  }, (error, response, body) => {
-    if (error) {
-      console.log('百度删除失败')
-    }
   })
 }

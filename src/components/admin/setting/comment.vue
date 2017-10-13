@@ -47,7 +47,7 @@
               <span>启用评论分页</span>
             </label>
             <span>每页显示</span>
-            <input type="number" class="mo-input input-inline input-number" :disabled="!fd.pagination" v-model="fd.pageLimit">
+            <input type="number" class="mo-input input-inline input-number" :disabled="!fd.pagination" v-model="fd.pageSize">
             <span>条评论</span>
           </div>
 
@@ -57,7 +57,7 @@
           <h4 class="mb-form-group_title">邮件通知</h4>
           <div class="mb-form-group_item">
             <label class="mo-switch mo-switch-positive">
-              <input type="checkbox" name="useCache" v-model="fd.newCommentNoticle" />
+              <input type="checkbox" name="useCache" v-model="fd.newCommentNotice" />
               <span class="icon"></span>
               <span>有新评论时通知您</span>
             </label>

@@ -11,10 +11,7 @@
       <div class="mb-panel-body">
 
         <div class="mo-form-row">
-          <label class="mo-form-label">
-            <span>
-              <sub class="mo-text-negative">*&nbsp;</sub>云存储</span>
-          </label>
+          <label class="mo-form-label">云存储</label>
           <div class="mo-form-flex">
             <div class="mo-row">
               <div class="mo-cell-7">
@@ -29,10 +26,7 @@
 
         <div class="mo-clearfix" v-if="fd.storage === 'qiniu'">
           <div class="mo-form-row">
-            <label class="mo-form-label">
-              <span>
-                <sub class="mo-text-negative">*&nbsp;</sub>域名</span>
-            </label>
+            <label class="mo-form-label">域名</label>
             <div class="mo-form-flex">
               <div class="mo-row">
                 <div class="mo-cell-7">
@@ -44,10 +38,7 @@
           </div>
 
           <div class="mo-form-row">
-            <label class="mo-form-label">
-              <span>
-                <sub class="mo-text-negative">*&nbsp;</sub>accessKey</span>
-            </label>
+            <label class="mo-form-label">accessKey </label>
             <div class="mo-form-flex">
               <div class="mo-row">
                 <div class="mo-cell-7">
@@ -59,10 +50,7 @@
           </div>
 
           <div class="mo-form-row">
-            <label class="mo-form-label">
-              <span>
-                <sub class="mo-text-negative">*&nbsp;</sub>secretKey</span>
-            </label>
+            <label class="mo-form-label">secretKey</label>
             <div class="mo-form-flex">
               <div class="mo-row">
                 <div class="mo-cell-7">
@@ -74,10 +62,7 @@
           </div>
 
           <div class="mo-form-row">
-            <label class="mo-form-label">
-              <span>
-                <sub class="mo-text-negative">*&nbsp;</sub>bucket</span>
-            </label>
+            <label class="mo-form-label">bucket</label>
             <div class="mo-form-flex">
               <div class="mo-row">
                 <div class="mo-cell-7">

@@ -3,9 +3,9 @@
     <mb-breadcrumb :links="breadcrumb"></mb-breadcrumb>
     <div class="mb-panel">
       <div class="mb-panel-head mo-row">
-        <h3 class="mo-cell">文章</h3>
+        <h3 class="mo-cell">标签</h3>
         <div class="mo-cell mo-text-right">
-          <router-link to="" class="mo-btn mo-btn-positive">新增文章</router-link>
+          <router-link to="" class="mo-btn mo-btn-positive">新增标签</router-link>
         </div>
       </div>
       <div class="mb-panel-body">
@@ -29,7 +29,7 @@ export default {
           name: '内容'
         },
         {
-          name: '文章'
+          name: '标签'
         }
       ],
     }

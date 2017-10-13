@@ -11,10 +11,7 @@
       <div class="mb-panel-body">
 
         <div class="mo-form-row">
-          <label class="mo-form-label">
-            <span>
-              <sub class="mo-text-negative">*&nbsp;</sub>加密</span>
-          </label>
+          <label class="mo-form-label">加密</label>
           <div class="mo-form-flex">
             <div class="mo-row">
               <div class="mo-cell-7">
@@ -29,10 +26,7 @@
         </div>
 
         <div class="mo-form-row">
-          <label class="mo-form-label">
-            <span>
-              <sub class="mo-text-negative">*&nbsp;</sub>主机</span>
-          </label>
+          <label class="mo-form-label">主机</label>
           <div class="mo-form-flex">
             <div class="mo-row">
               <div class="mo-cell-7">
@@ -44,10 +38,7 @@
         </div>
 
         <div class="mo-form-row">
-          <label class="mo-form-label">
-            <span>
-              <sub class="mo-text-negative">*&nbsp;</sub>端口</span>
-          </label>
+          <label class="mo-form-label">端口</label>
           <div class="mo-form-flex">
             <div class="mo-row">
               <div class="mo-cell-7">
@@ -59,10 +50,7 @@
         </div>
 
         <div class="mo-form-row">
-          <label class="mo-form-label">
-            <span>
-              <sub class="mo-text-negative">*&nbsp;</sub>用户名</span>
-          </label>
+          <label class="mo-form-label">用户名</label>
           <div class="mo-form-flex">
             <div class="mo-row">
               <div class="mo-cell-7">
@@ -74,10 +62,7 @@
         </div>
 
         <div class="mo-form-row">
-          <label class="mo-form-label">
-            <span>
-              <sub class="mo-text-negative">*&nbsp;</sub>密码</span>
-          </label>
+          <label class="mo-form-label">密码</label>
           <div class="mo-form-flex">
             <div class="mo-row">
               <div class="mo-cell-7">
@@ -89,10 +74,7 @@
         </div>
 
         <div class="mo-form-row">
-          <label class="mo-form-label">
-            <span>
-              <sub class="mo-text-negative">*&nbsp;</sub>发件邮箱</span>
-          </label>
+          <label class="mo-form-label">发件邮箱</label>
           <div class="mo-form-flex">
             <div class="mo-row">
               <div class="mo-cell-7">

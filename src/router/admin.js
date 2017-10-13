@@ -10,15 +10,29 @@ import Comment from '@/components/admin/comment/index'
 import Theme from '@/components/admin/theme/index'
 
 
-import Article from '@/components/admin/content/article'
-import Page from '@/components/admin/content/page'
-import Link from '@/components/admin/content/link'
+import ConArticle from '@/components/admin/content/article'
+import ConPage from '@/components/admin/content/page'
+import ConLink from '@/components/admin/content/link'
+import ConCate from '@/components/admin/content/cate'
+import ConTag from '@/components/admin/content/tag'
 
 
 import SetGeneral from '@/components/admin/setting/general'
 import SetUpload from '@/components/admin/setting/upload'
 import SetMail from '@/components/admin/setting/mail'
 import SetComment from '@/components/admin/setting/comment'
+
+import UserFrom from '@/components/admin/user/form'
+
+
+
+
+
+
+
+
+
+
 
 Vue.use(Router)
 
@@ -51,13 +65,19 @@ export default new Router({
         redirect: '/content/article',
         children: [{
           path: 'article',
-          component: Article
+          component: ConArticle
         }, {
           path: 'page',
-          component: Page
+          component: ConPage
         }, {
           path: 'link',
-          component: Link
+          component: ConLink
+        }, {
+          path: 'cate',
+          component: ConCate
+        }, {
+          path: 'tag',
+          component: ConTag
         }]
       },
       {
@@ -77,6 +97,10 @@ export default new Router({
           path: 'comment',
           component: SetComment
         }]
+      },
+      {
+        path: 'user/new',
+        component: UserFrom
       }
     ]
   }, {

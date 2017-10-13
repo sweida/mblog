@@ -9,6 +9,10 @@
 const Script = require('../controllers/script')
 const Setting = require('../controllers/setting')
 
+const User = require('../controllers/user')
+
+
+
 module.exports = router => {
 
   router
@@ -21,6 +25,11 @@ module.exports = router => {
 
 
     .put('/script/run', Script.run)
+
+
+    .post('/user/', User.add)
+
+
 
 
 

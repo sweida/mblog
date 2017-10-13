@@ -5,9 +5,13 @@ const year = today.getFullYear() === 2017 ? '2017' : `2017-${today.getFullYear()
 export default {
   general: {
     title: '',
+    subtitle: '使用mblog创建的站点',
     keyword: 'smohan, mblog',
     description: '低调的使用mblog',
     lang: 'zh',
+    pageSize: 20,
+    titleType: 3,
+    icp: '',
     copyright: `Copyright © ${year} mblog. All Rights Reserved`,
   },
   upload: {
@@ -33,8 +37,8 @@ export default {
     fieldsRequire: true,
     onlineAvatar: true,
     pagination: true,
-    pageLimit: 20,
-    newCommentNoticle: true,
+    pageSize: 20,
+    newCommentNotice: true,
     replyNotice: true,
     review: true,
     showLink: true,

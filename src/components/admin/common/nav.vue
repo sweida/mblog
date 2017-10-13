@@ -14,13 +14,23 @@
         </router-link>
         <ul slot="body">
           <li>
+            <router-link to="/content/article" class="nav-link-child">
+              <span class="nav-label">文章</span>
+            </router-link>
+          </li>
+          <li>
             <router-link to="/content/page" class="nav-link-child">
               <span class="nav-label">页面</span>
             </router-link>
           </li>
           <li>
-            <router-link to="/content/article" class="nav-link-child">
-              <span class="nav-label">文章</span>
+            <router-link to="/content/cate" class="nav-link-child">
+              <span class="nav-label">分类</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/content/tag" class="nav-link-child">
+              <span class="nav-label">标签</span>
             </router-link>
           </li>
           <li>
