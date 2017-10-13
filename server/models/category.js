@@ -27,11 +27,6 @@ const CategorySchema = new Schema({
     type: Number,
     default: 1
   },
-  //启用
-  enabled: {
-    type: Boolean,
-    default: true
-  },
   //是否删除
   deleted: {
     type: Boolean,

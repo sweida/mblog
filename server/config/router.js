@@ -43,6 +43,8 @@ module.exports = router => {
 
     .get('/category/list/', verifyAdminToken, verifyJurisdiction('category-view'), Category.getList)
     .post('/category/', verifyAdminToken, verifyJurisdiction('category-add'), Category.add)
+    .put('/category/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('category-update'), Category.update)
+    .delete('/category/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('category-remove'), Category.remove)
   //.get('/category/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('user-view'), User.getOne)
 
 

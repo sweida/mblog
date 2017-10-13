@@ -16,8 +16,8 @@
                 <th width="20%">名称</th>
                 <th width="20%">别名</th>
                 <th width="30%">描述</th>
-                <th width="10%">排序</th>
-                <th width="20%" align="right">编辑 | 删除 | 状态</th>
+                <th align="center" width="10%">排序</th>
+                <th width="20%" align="right">编辑 | 删除</th>
               </tr>
             </thead>
             <tbody>
@@ -26,7 +26,7 @@
                   <span v-if="item.isChild" class="mo-text-hint">---- </span>{{item.name}}</td>
                 <td>{{item.alias}}</td>
                 <td>{{item.description}}</td>
-                <td></td>
+                <td align="center"><input type="number" class="mo-input input-inline input-number" v-model="item.order"></td>
                 <td align="right">
                   <div class="mo-btns">
                     <button class="mo-btn mo-btn-small" @click="edit(item)">
@@ -35,12 +35,6 @@
                     <button class="mo-btn mo-btn-small" @click="remove(item)">
                       <i class="mo-icon-delete"></i>
                     </button>
-                    <div class="mo-btn mo-btn-small">
-                      <label class="mo-switch mo-switch-positive">
-                        <input type="checkbox" v-model="item.enabled" @change="updateEnabled(item)">
-                        <span class="icon"></span>
-                      </label>
-                    </div>
                   </div>
                 </td>
               </tr>
@@ -50,10 +44,10 @@
       </div>
     </div>
 
-    <mo-modal v-model="formModal" top="10%">
+    <mo-modal v-model="formModal" top="5%">
       <template slot="title" v-if="!id">新增分类</template>
       <template slot="title" v-else>编辑分类</template>
-      <div class="form-modal" slot="body">
+      <div style="min-width: 480px;" slot="body">
         <form method="post" @submit.prevent="save">
           <div class="mo-row mb-modal-form-row">
             <label class="mo-cell-2 mb-modal-form-label">名称</label>
@@ -64,7 +58,7 @@
           <div class="mo-row mb-modal-form-row">
             <label class="mo-cell-2 mb-modal-form-label">别名</label>
             <div class="mo-cell-10">
-              <input type="text" class="mo-input" maxlength="40" v-model="fd.alias">
+              <input type="text" class="mo-input" maxlength="40" v-model="fd.alias" placeholder="支持英文数字下划线短横线">
             </div>
           </div>
           <div class="mo-row mb-modal-form-row">
@@ -126,6 +120,7 @@ export default {
   },
   methods: {
     getList() {
+      this.parentList = []
       this.$http.get('/api/category/list')
         .then(({ body }) => {
           if (body.code === 200) {
@@ -182,17 +177,31 @@ export default {
       this.id = null
       this.fd = extend({}, fields)
     },
-    updateEnabled() {
-
-    },
     edit(item) {
       this.id = item._id
       this.fd = extend(this.fd, item)
+      if (!this.fd.parent) {
+        this.fd.parent = ''
+      }
       this.formModal = true
     },
-    remove() {
-
-    }
+    removeHandler(id) {
+      this.$http.delete(`/api/category/${id}`)
+        .then(({ body }) => {
+          if (body.code === 200) {
+            this.getList()
+          } else {
+            this.$layer.toast(body.message)
+          }
+        })
+        .catch(e => this.$layer.toast(e.statusText))
+    },
+    remove(item) {
+      this.$layer.confirm(`您确定删除分类 <b class="mo-text-negative">${item.name}</b> 吗？`, (layer) => {
+        this.removeHandler(item._id)
+        layer.close()
+      })
+    },
   },
   mounted() {
     this.getList()
@@ -200,9 +209,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.form-modal {
-  min-width: 480px;
-}
-</style>
 
