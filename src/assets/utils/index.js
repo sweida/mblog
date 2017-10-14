@@ -1,3 +1,10 @@
+/**
+ * 一些常用方法集
+ * Author : smohan
+ * Website : https://smohan.net
+ * Date: 2017/10/12 
+ */
+
 const isObject = obj => obj !== null && typeof obj === 'object'
 
 const isPlainObject = obj => Object.prototype.toString.call(obj) === '[object Object]' && Object.getPrototypeOf(obj) == Object.prototype
@@ -9,6 +16,10 @@ const isObjectId = value => value && !!/^[0-9a-fA-F]{24}$/.test(value)
 const isShortId = id => id && !!/^[a-zA-Z0-9]{4,6}$/.test(id)
 
 
+/**
+ * 对象深拷贝
+ * @return {Object}
+ */
 function extend() {
   let options, name, src, copy, copyIsArray, clone,
     target = arguments[0] || {},
@@ -55,7 +66,11 @@ function extend() {
   return target
 }
 
-
+/**
+ * 实体转html
+ * @param {String} string 
+ * @return {String}
+ */
 const decodeHtml = string => {
   if (!string) return ''
   return string.trim().replace(/&(lt|gt|nbsp|amp|quot);/ig, (all, char) => {
@@ -68,7 +83,6 @@ const decodeHtml = string => {
     }[char]
   })
 }
-
 
 /**
  * [树形化数组]
@@ -101,26 +115,46 @@ const arrayToTree = (data = [], idKey = '_id', parentKey = 'parent', childrenKey
   }
   return tree
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+/**
+ * 将分类按照父子关系的顺序排列
+ * 同时返回父分类列表
+ * @param {Array} array 
+ * @return {Object}
+ */
+const getCateMap = (array = []) => {
+  const tree = arrayToTree(array)
+  const data = []
+  const result = Object.create(null)
+
+  for (let i = 0, len = tree.length; i < len; i++) {
+    data.push(tree[i])
+    if (tree[i].children && tree[i].children.length) {
+      tree[i].children.sort((a, b) => a.order - b.order)
+      for (let j = 0, size = tree[i].children.length; j < size; j++) {
+        tree[i].children[j].isChild = true
+        data.push(tree[i].children[j])
+      }
+    }
+  }
+
+  result.list = data
+  result.parent = []
+
+  for (let i = 0, len = array.length; i < len; i++) {
+    if (!array[i].parent) {
+      result.parent.push({
+        id: array[i]._id,
+        name: array[i].name
+      })
+    }
+  }
+
+  return result
+}
+
+
 
 const MonthlyAbbrs = ['Jan', 'Feb', 'Mar', 'Apr', 'may', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
 
@@ -130,9 +164,9 @@ const COLORS = ['#9e9e9e', '#5cb85c', '#795da3', '#6bc30d', '#d9534f', '#d44465'
 
 /**
  * 数组随机洗牌
- * @param  {[type]}  array [description]
- * @param  {Boolean} copy  [description]
- * @return {[type]}        [description]
+ * @param  {[type]}  array
+ * @param  {Boolean} copy 
+ * @return {[type]}       
  */
 const shuffleArray = (array, copy = true) => {
   const arr = copy ? extend([], array) : array
@@ -147,7 +181,11 @@ const shuffleArray = (array, copy = true) => {
   return arr
 }
 
-
+/**
+ * 将数字转换为 XK, XW 等
+ * @param {Number} number
+ * @return {String} 
+ */
 const conversionNumber = number => {
   if (number < 1000) {
     return number;
@@ -171,5 +209,6 @@ export {
   base64PNG,
   COLORS,
   shuffleArray,
-  conversionNumber
+  conversionNumber,
+  getCateMap
 }

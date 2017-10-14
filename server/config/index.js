@@ -17,10 +17,7 @@ const custom = fs.readFileSync(customPath)
 
 const customJson = JSON.parse(custom.toString())
 
-
 const userSetting = merge({}, setting, customJson)
-
-
 
 
 const config = {
@@ -46,6 +43,10 @@ const config = {
       secret: 'fgSB4CdK4kUCWCUwQ8ACIEUykWqWQCIA'
     },
   },
+  maxSize: {
+    navigation: 30,
+    category: 100
+  }
 }
 
 for (let k in userSetting) {

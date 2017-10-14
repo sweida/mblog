@@ -38,7 +38,7 @@ exports.add = async(req, res) => {
       rules: 'int|in[1,2,3]'
     },
     role: {
-      rules: 'int|between[1, 101]'
+      rules: 'int|between[1, 200]'
     },
     jurisdiction: {
       rules: 'array'

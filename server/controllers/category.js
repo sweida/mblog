@@ -8,6 +8,7 @@
 const U = require('../utils/')
 const R = require('../utils/result')
 const V = require('../utils/validate')
+const C = require('../config/')['maxSize']
 const Category = require('../models/category')
 const Nav = require('../models/nav')
 
@@ -54,6 +55,11 @@ exports.add = async(req, res) => {
 
   if (!result.passed)
     return res.json(R.error(402, result.msg))
+
+  const count = await Nav.count()
+
+  if (count >= C.category)
+    return res.json(R.error(403, `The number of category can not exceed ${C.category}`))
 
   const post = result.data
   const nameDoc = await Category.findOne({
@@ -205,7 +211,6 @@ exports.remove = async(req, res) => {
   if (!V.is('objectId', id))
     return res.json(R.error(402, V.msgs.objectId))
 
-
   //设置子分类为父分类
   await Category.update({
     parent: id
@@ -220,7 +225,7 @@ exports.remove = async(req, res) => {
   //设置分类下属文章的分类为未分类
 
   //删除该分类
-  await Category.remove({
+  await Category.findOneAndRemove({
       _id: id
     })
     .then(doc => res.json(doc ? R.success() : R.error(404, 'category not found')))

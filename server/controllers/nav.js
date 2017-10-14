@@ -8,8 +8,10 @@
 const U = require('../utils/')
 const R = require('../utils/result')
 const V = require('../utils/validate')
+const C = require('../config/')['maxSize']
 const Category = require('../models/category')
 const Nav = require('../models/nav')
+
 
 /**
  * 获取全部导航
@@ -49,6 +51,12 @@ exports.add = async(req, res) => {
 
   if (!result.passed)
     return res.json(R.error(402, result.msg))
+
+  const count = await Nav.count()
+
+  if (count >= C.navigation)
+    return res.json(R.error(403, `The number of navigation can not exceed ${C.navigation}`))
+
   const type = Number(result.data.type)
   if (type === 0) {
 

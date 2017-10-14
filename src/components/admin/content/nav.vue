@@ -5,7 +5,7 @@
       <div class="mb-panel-head mo-row">
         <h3 class="mo-cell">导航</h3>
         <div class="mo-cell mo-text-right">
-          <button class="mo-btn mo-btn-positive" @click="formModal=true">新增导航</button>
+          <button class="mo-btn mo-btn-positive" @click="formModal=true" v-show="list.length < 30">新增导航</button>
         </div>
       </div>
       <div class="mb-panel-body">
@@ -158,7 +158,7 @@
 import MoSubmit from '@/components/ui/submit'
 import MoBreadcrumb from '@/components/ui/breadcrumb'
 import MoModal from '@/components/ui/modal'
-import { arrayToTree, extend } from '@/assets/utils/'
+import { getCateMap, extend } from '@/assets/utils/'
 import fields from '../field/nav'
 import MbCateTree from '../common/catetree'
 export default {
@@ -196,28 +196,9 @@ export default {
       this.$http.get('/api/nav/list')
         .then(({ body }) => {
           if (body.code === 200) {
-            const tree = arrayToTree(body.data)
-            const data = []
-            for (let i = 0, len = tree.length; i < len; i++) {
-              data.push(tree[i])
-              if (tree[i].children && tree[i].children.length) {
-                tree[i].isParent = true
-                tree[i].children.sort((a, b) => a.order - b.order)
-                for (let j = 0, size = tree[i].children.length; j < size; j++) {
-                  tree[i].children[j].isChild = true
-                  data.push(tree[i].children[j])
-                }
-              }
-            }
-            this.list = data
-            for (let i = 0, len = body.data.length; i < len; i++) {
-              if (!body.data[i].parent) {
-                this.parentList.push({
-                  id: body.data[i]._id,
-                  name: body.data[i].name
-                })
-              }
-            }
+            const map = getCateMap(body.data)
+            this.list = map.list
+            this.parentList = map.parent
           }
         })
     },
@@ -314,7 +295,7 @@ export default {
     },
 
     remove(item) {
-      this.$layer.confirm(`您确定删除分类 <b class="mo-text-negative">${item.name}</b> 吗？`, (layer) => {
+      this.$layer.confirm(`您确定删除导航 <b class="mo-text-negative">${item.name}</b> 吗？`, (layer) => {
         this.removeHandler(item._id)
         layer.close()
       })
