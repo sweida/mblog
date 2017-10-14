@@ -28,7 +28,6 @@ exports.getList = async(req, res) => {
   const docs = await Nav.find(query, fields, {
     sort
   })
-
   return res.json(docs ? R.success(docs) : res.json(R.error(500)))
 }
 
@@ -118,7 +117,8 @@ exports.add = async(req, res) => {
         _id: item
       }, {
         _id: 1,
-        name: 1
+        name: 1,
+        alias: 1
       })
 
       if (!category)
@@ -127,6 +127,7 @@ exports.add = async(req, res) => {
       let nav = new Nav({
         name: category.name,
         type: 2,
+        url: category.alias || category._id, //URL别名优先
         category: category._id
       })
 
@@ -137,7 +138,8 @@ exports.add = async(req, res) => {
         parent: category._id
       }, {
         _id: 1,
-        name: 1
+        name: 1,
+        alias: 1
       })
 
       if (childs && childs.length) {
@@ -146,6 +148,7 @@ exports.add = async(req, res) => {
           let childNav = new Nav({
             name: child.name,
             type: 2,
+            url: child.alias || child._id,
             parent: nav._id,
             category: child._id
           })
@@ -180,9 +183,6 @@ exports.update = async(req, res) => {
     },
     name: {
       rules: 'require|chsDash|min:2',
-    },
-    url: {
-      rules: 'url',
     },
     parent: {
       rules: 'objectId',
@@ -257,6 +257,68 @@ exports.remove = async(req, res) => {
   //删除该导航
   await Nav.findOneAndRemove({
       _id: id
+    })
+    .then(doc => res.json(doc ? R.success() : R.error(404, 'nav not found')))
+    .catch(error => res.json(R.error(500, error.message)))
+}
+
+
+/**
+ * 更新导航的显示隐藏状态
+ * @param  {Object} req  
+ * @param  {Object} res  
+ * @return {Object}  
+ */
+exports.updateDisplay = async(req, res) => {
+  const id = req.params.id
+  if (!V.is('objectId', id))
+    return res.json(R.error(402, V.msgs.objectId))
+  const result = V.validate(req.body, {
+    display: {
+      rules: 'require|boolean',
+    },
+  }, ['display'])
+
+  if (!result.passed)
+    return res.json(R.error(402, result.msg))
+
+  await Nav.findOneAndUpdate({
+      _id: id
+    }, {
+      $set: {
+        display: result.data.display
+      }
+    })
+    .then(doc => res.json(doc ? R.success() : R.error(404, 'nav not found')))
+    .catch(error => res.json(R.error(500, error.message)))
+}
+
+
+/**
+ * 更新导航的排序
+ * @param  {Object} req  
+ * @param  {Object} res  
+ * @return {Object}  
+ */
+exports.updateOrder = async(req, res) => {
+  const id = req.params.id
+  if (!V.is('objectId', id))
+    return res.json(R.error(402, V.msgs.objectId))
+  const result = V.validate(req.body, {
+    order: {
+      rules: 'require|int|between[1,9999]',
+    },
+  }, ['order'])
+
+  if (!result.passed)
+    return res.json(R.error(402, result.msg))
+
+  await Nav.findOneAndUpdate({
+      _id: id
+    }, {
+      $set: {
+        order: Number(result.data.order)
+      }
     })
     .then(doc => res.json(doc ? R.success() : R.error(404, 'nav not found')))
     .catch(error => res.json(R.error(500, error.message)))

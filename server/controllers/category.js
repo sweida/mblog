@@ -9,7 +9,7 @@ const U = require('../utils/')
 const R = require('../utils/result')
 const V = require('../utils/validate')
 const Category = require('../models/category')
-
+const Nav = require('../models/nav')
 
 /**
  * 获取全部分类列表
@@ -167,14 +167,29 @@ exports.update = async(req, res) => {
     delete post.parent
   }
 
-  await Category.update({
+  await Category.findOneAndUpdate({
       _id: id
     }, {
       $set: post
     }, {
       new: true
     })
-    .then(doc => res.json(R.success(doc)))
+    .then(async function (doc) {
+      if (doc) {
+        //更新导航的URL，便于前端直接调用URL而不需要在链表查询其别名
+        //20171014 17:58
+        await Nav.update({
+          category: id
+        }, {
+          $set: {
+            url: post.alias || id
+          }
+        })
+        return res.json(R.success(doc))
+      } else {
+        return res.json(R.error(404, 'category not found'))
+      }
+    })
     .catch(error => res.json(R.error(500, error.message)))
 }
 

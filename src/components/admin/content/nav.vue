@@ -17,7 +17,7 @@
                 <th width="20%">类型</th>
                 <th width="30%">URL</th>
                 <th align="center" width="10%">排序</th>
-                <th width="20%" align="right">编辑 | 删除</th>
+                <th width="20%" align="right">编辑 | 删除 | 显示</th>
               </tr>
             </thead>
             <tbody>
@@ -30,12 +30,12 @@
                   <span class="mo-text-negative" v-if="item.type === 2">类别</span>
                   <span class="mo-text-positive" v-if="item.type === 3">页面</span>
                 </td>
-                <td>
+                <td class="mo-text-hint">
                   <span v-if="item.type === 0 || item.type === 1">{{item.url}}</span>
-                  <span v-if="item.type === 2">/c/{{item.category}}</span>
+                  <span v-if="item.type === 2">/c/{{item.url}}</span>
                   <span v-if="item.type === 3">/{{item.page}}</span>
                 </td>
-                <td align="center"><input type="number" class="mo-input input-inline input-number" v-model="item.order"></td>
+                <td align="center"><input type="number" class="mo-input input-inline input-number" v-model.lazy="item.order" @change="updateOrder(item)"></td>
                 <td align="right">
                   <div class="mo-btns">
                     <button class="mo-btn mo-btn-small" @click="edit(item)">
@@ -44,6 +44,14 @@
                     <button class="mo-btn mo-btn-small" @click="remove(item)" :disabled="item.type === 0">
                       <i class="mo-icon-delete"></i>
                     </button>
+
+                    <div class="mo-btn mo-btn-small">
+                      <label class="mo-switch mo-switch-positive">
+                        <input type="checkbox" v-model="item.display" @change="updateDisplay(item)">
+                        <span class="icon"></span>
+                      </label>
+                    </div>
+
                   </div>
                 </td>
               </tr>
@@ -259,6 +267,7 @@ export default {
           this.committing = false
         })
     },
+
     update() {
       this.$http.put(`/api/nav/${this.id}`, this.fd)
         .then(({ body }) => {
@@ -276,11 +285,13 @@ export default {
           this.committing = false
         })
     },
+
     closeModal() {
       this.formModal = false
       this.id = null
       this.fd = extend({}, fields)
     },
+
     edit(item) {
       this.id = item._id
       this.fd = extend(this.fd, item)
@@ -289,6 +300,7 @@ export default {
       }
       this.formModal = true
     },
+
     removeHandler(id) {
       this.$http.delete(`/api/nav/${id}`)
         .then(({ body }) => {
@@ -300,12 +312,29 @@ export default {
         })
         .catch(e => this.$layer.toast(e.statusText))
     },
+
     remove(item) {
       this.$layer.confirm(`您确定删除分类 <b class="mo-text-negative">${item.name}</b> 吗？`, (layer) => {
         this.removeHandler(item._id)
         layer.close()
       })
     },
+
+    updateDisplay(item) {
+      this.$http.put(`/api/nav/display/${item._id}`, { display: item.display })
+    },
+
+    updateOrder(item) {
+      if (item.order && !isNaN(item.order)) {
+        item.order = Math.floor(Number(item.order))
+        this.$http.put(`/api/nav/order/${item._id}`, { order: item.order })
+          .then(({ body }) => {
+            if (body.code === 200) {
+              this.getList()
+            }
+          })
+      }
+    }
   },
   mounted() {
     this.getList()

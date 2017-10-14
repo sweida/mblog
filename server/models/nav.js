@@ -3,6 +3,14 @@
  * Author : smohan
  * Website : https://smohan.net
  * Date: 2017/10/14 
+ * 
+ * note: 20171014 17:50
+ * 考虑了下导航是一个常用功能
+ * 如果使用关联模型查询分类或者页面，会造成不必要的消耗
+ * 因此去掉关联查询，在分类/页面修改的情况下关联修改导航的URL
+ * 将资源浪费放置在后台，前端仅保持简单的URL调用
+ * 
+ * 新增导航的显示/隐藏功能
  */
 
 const mongoose = require('mongoose')
@@ -35,19 +43,19 @@ const NavSchema = new Schema({
   },
 
   // 如果是分类，关联的分类
-  category: {
-    type: ObjectId,
-    ref: 'Category'
-  },
+  category: ObjectId,
 
   //如果是页面， 管理的文章
-  page: {
-    type: ObjectId,
-    ref: 'Article'
-  },
+  page: ObjectId,
 
   //新页面打开
   newTab: Boolean,
+
+  //显示隐藏
+  display: {
+    type: Boolean,
+    default: true
+  }
 
 }, {
   connection: TABLE_NAME,

@@ -55,9 +55,11 @@ module.exports = router => {
     .delete('/tag/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('tag-remove'), Tag.remove)
 
 
-    .get('/nav/list', verifyAdminToken, verifyJurisdiction('nav-view'), Nav.getList)
+    .get('/nav/list', verifyAdminToken, Nav.getList)
     .post('/nav', verifyAdminToken, verifyJurisdiction('nav-add'), Nav.add)
     .put('/nav/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('nav-update'), Nav.update)
+    .put('/nav/display/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('nav-update'), Nav.updateDisplay)
+    .put('/nav/order/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('nav-update'), Nav.updateOrder)
     .delete('/nav/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('nav-remove'), Nav.remove)
 
 
