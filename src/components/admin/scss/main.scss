@@ -219,3 +219,9 @@
 .td-description {
   max-width: 20rem;
 }
+
+
+.mb-scroller {
+  border: 1px solid $color-border;
+  overflow: auto;
+}

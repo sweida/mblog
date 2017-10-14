@@ -22,6 +22,9 @@ const NavSchema = new Schema({
     default: 1
   },
 
+  //父导航
+  parent: ObjectId,
+
   //链接地址
   url: String,
 

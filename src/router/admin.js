@@ -15,6 +15,7 @@ import ConPage from '@/components/admin/content/page'
 import ConLink from '@/components/admin/content/link'
 import ConCate from '@/components/admin/content/cate'
 import ConTag from '@/components/admin/content/tag'
+import ConNav from '@/components/admin/content/nav'
 
 
 import SetGeneral from '@/components/admin/setting/general'
@@ -33,7 +34,7 @@ export default new Router({
   routes: [{
     path: '/',
     component: Main,
-    redirect: '/dashboard',
+    redirect: '/dashboard/',
     children: [{
         path: 'dashboard',
         component: Dashboard
@@ -52,7 +53,7 @@ export default new Router({
       {
         path: 'content',
         component: Content,
-        redirect: '/content/article',
+        redirect: '/content/article/',
         children: [{
           path: 'article',
           component: ConArticle
@@ -68,12 +69,15 @@ export default new Router({
         }, {
           path: 'tag',
           component: ConTag
+        }, {
+          path: 'nav',
+          component: ConNav
         }]
       },
       {
         path: 'setting',
         component: Setting,
-        redirect: '/setting/general',
+        redirect: '/setting/general/',
         children: [{
           path: 'general',
           component: SetGeneral

@@ -16,7 +16,7 @@ const User = require('../controllers/user')
 const Category = require('../controllers/category')
 
 const Tag = require('../controllers/tag')
-
+const Nav = require('../controllers/nav')
 
 
 module.exports = router => {
@@ -26,15 +26,15 @@ module.exports = router => {
 
 
   router
-    .get('/setting/', verifyAdminToken, Setting.getAll)
-    .put('/setting/', verifyAdminToken, Setting.update)
+    .get('/setting', verifyAdminToken, Setting.getAll)
+    .put('/setting', verifyAdminToken, Setting.update)
 
 
     .put('/script/run', verifyAdminToken, Script.run)
 
 
     .post('/user/admin/login', User.adminLogin)
-    .get('/user/list/', verifyAdminToken, verifyJurisdiction('user-view'), User.getList)
+    .get('/user/list', verifyAdminToken, verifyJurisdiction('user-view'), User.getList)
     .get('/user/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('user-view'), User.getOne)
     .post('/user/', verifyAdminToken, verifyJurisdiction('user-add'), User.add)
     .put('/user/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('user-update'), User.update)
@@ -43,17 +43,23 @@ module.exports = router => {
     .delete('/user/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('user-remove'), User.remove)
 
 
-    .get('/category/list/', verifyAdminToken, verifyJurisdiction('category-view'), Category.getList)
-    .post('/category/', verifyAdminToken, verifyJurisdiction('category-add'), Category.add)
+    .get('/category/list', verifyAdminToken, verifyJurisdiction('category-view'), Category.getList)
+    .post('/category', verifyAdminToken, verifyJurisdiction('category-add'), Category.add)
     .put('/category/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('category-update'), Category.update)
     .delete('/category/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('category-remove'), Category.remove)
 
 
-    .get('/tag/list/', verifyAdminToken, verifyJurisdiction('tag-view'), Tag.getList)
-    .post('/tag/', verifyAdminToken, verifyJurisdiction('tag-add'), Tag.add)
+    .get('/tag/list', verifyAdminToken, verifyJurisdiction('tag-view'), Tag.getList)
+    .post('/tag', verifyAdminToken, verifyJurisdiction('tag-add'), Tag.add)
     .put('/tag/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('tag-update'), Tag.update)
     .delete('/tag/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('tag-remove'), Tag.remove)
-  
+
+
+    .get('/nav/list', verifyAdminToken, verifyJurisdiction('nav-view'), Nav.getList)
+    .post('/nav', verifyAdminToken, verifyJurisdiction('nav-add'), Nav.add)
+    .put('/nav/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('nav-update'), Nav.update)
+    .delete('/nav/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('nav-remove'), Nav.remove)
+
 
 
 
