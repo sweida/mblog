@@ -1,10 +1,17 @@
+const commander = require('commander')
+const inquirer = require('inquirer')
+const fs = require('fs')
+const path = require('path')
 const mongoose = require('mongoose')
+const chalk = require('chalk')
+
+const setting = require('./server/config/setting')
 const C = require('./server/config/')['db']
 const User = require('./server/models/user')
 const Nav = require('./server/models/nav')
 const Category = require('./server/models/category')
 const Tag = require('./server/models/tag')
-const chalk = require('chalk')
+
 
 //设置默认promise
 mongoose.Promise = global.Promise
@@ -18,10 +25,59 @@ const error = msg => log(chalk.red(msg))
 const info = msg => log(chalk.gray(msg))
 
 
+const questions = [{
+    type: 'input',
+    name: 'websiteName',
+    message: 'website name: ',
+    default: 'mblog',
+    validate(value) {
+      if (value && value.length < 20) {
+        return true
+      }
+      return 'The website name is within 20 characters'
+    }
+  },
+  {
+    type: 'input',
+    name: 'email',
+    message: 'administrators email: ',
+    validate(value) {
+      if (value && /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(value)) {
+        return true
+      }
+      return 'Please enter a valid email address'
+    }
+  },
+  {
+    type: 'password',
+    name: 'password',
+    message: 'password: ',
+    validate(value) {
+      if (value && value.length >= 6 && value.length <= 20) {
+        return true
+      }
+      return 'The password length is between 6 and 20 characters'
+    }
+  },
+]
 
-async function initSchema() {
+info('Please enter the following information to complete the installation:')
+
+inquirer.prompt(questions).then(answers => {
+  setting.general.title = answers.websiteName
+  //写入配置文件
+
+  info('Write the configuration file...')
+  fs.writeFileSync(path.join(__dirname, './server/config/custom.json'), JSON.stringify(setting))
+
+  init(answers)
+
+})
+
+
+async function initSchema(answers) {
   //清空
-  info('正在初始化数据...')
+  info('Data is being initialized...')
   await User.remove({})
 
   await Nav.remove({})
@@ -32,8 +88,8 @@ async function initSchema() {
 
   //写入  
   const administrator = new User({
-    email: 'admin@mblog.com',
-    password: '123456',
+    email: answers.email,
+    password: answers.password,
     nick: 'admin',
     role: 200
   })
@@ -57,31 +113,26 @@ async function initSchema() {
     await navDoc.save()
   }
 
-  success('\n安装成功!')
-  info(`\n请使用以下账号登录MBlog管理中心：`)
-  log(chalk.cyanBright("\nemail: admin@mblog.com\npassword: 123456"))
+  success('\nSuccessful')
   mongoose.disconnect()
-  process.exit(1)
+  process.exit(0)
 }
 
 
-async function init() {
-  info('正在连接数据库...')
+async function init(answers) {
+  info('Connecting to database...')
   const auth = C.user && C.password ? `${C.user}:${C.password}` : ''
   await mongoose.connect(`mongodb://${auth}${C.host}:${C.port}/${C.database}`, {
       useMongoClient: true
     })
     .then(() => {
-        success('数据库链接成功')
-        initSchema()
+        //success('The database connection is successful')
+        initSchema(answers)
       },
       err => {
-        error('数据库连接失败')
+        error('Database connection failed')
         mongoose.disconnect()
         process.exit(1)
       }
     )
 }
-
-
-init()

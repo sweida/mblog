@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "install": "node ./install.js"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
@@ -15,6 +16,7 @@
     "cookie-parser": "^1.4.3",
     "crypto": "^1.0.1",
     "express": "^4.16.2",
+    "inquirer": "^3.3.0",
     "jsonwebtoken": "^8.1.0",
     "mongoose": "^4.12.1",
     "nodemailer": "^4.1.3",
