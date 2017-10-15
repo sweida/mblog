@@ -1,4 +1,12 @@
-const commander = require('commander')
+/**
+ * 命令行自动安装
+ * Author : smohan
+ * Website : https://smohan.net
+ * Date: 2017/10/15
+ * 
+ * node ./install.js or npm run install 
+ */
+
 const inquirer = require('inquirer')
 const fs = require('fs')
 const path = require('path')
@@ -31,7 +39,7 @@ const questions = [{
     message: 'website name: ',
     default: 'mblog',
     validate(value) {
-      if (value && value.length < 20) {
+      if (value.trim() && value.trim().length < 20) {
         return true
       }
       return 'The website name is within 20 characters'
@@ -42,7 +50,7 @@ const questions = [{
     name: 'email',
     message: 'administrators email: ',
     validate(value) {
-      if (value && /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(value)) {
+      if (value.trim() && /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(value.trim())) {
         return true
       }
       return 'Please enter a valid email address'
@@ -53,6 +61,7 @@ const questions = [{
     name: 'password',
     message: 'password: ',
     validate(value) {
+      value = value.trim()
       if (value && value.length >= 6 && value.length <= 20) {
         return true
       }

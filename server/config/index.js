@@ -1,11 +1,16 @@
+/**
+ * 基础配置项
+ * Author : smohan
+ * Website : https://smohan.net
+ * Date: 2017/10/10
+ */
+
 const setting = require('./setting')
 const fs = require('fs')
 const path = require("path")
 const {
   merge
 } = require('../utils/index')
-
-
 
 const customPath = path.join(__dirname, './custom.json')
 
@@ -20,12 +25,18 @@ const customJson = JSON.parse(custom.toString())
 const userSetting = merge({}, setting, customJson)
 
 
+/**
+ * 基础配置
+ * 初次运行时请修改server端口和db信息
+ */
 const config = {
+  version: '1.0.0',
+  //api server
   server: {
     host: 'localhost',
-    port: '9000'
+    port: 9000
   },
-  version: '1.0.0',
+  // database
   db: {
     host: 'localhost',
     port: 27017,
@@ -33,6 +44,7 @@ const config = {
     user: '',
     password: '',
   },
+
   token: {
     user: {
       key: 'mblog_user_token',
@@ -43,6 +55,7 @@ const config = {
       secret: 'fgSB4CdK4kUCWCUwQ8ACIEUykWqWQCIA'
     },
   },
+
   maxSize: {
     navigation: 30,
     category: 100
