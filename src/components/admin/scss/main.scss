@@ -220,8 +220,46 @@
   max-width: 20rem;
 }
 
-
 .mb-scroller {
   border: 1px solid $color-border;
   overflow: auto;
+}
+
+.mb-tabs {
+  .mb-tabs-head {
+    margin: 0 0 2rem 0;
+    padding: 0 1rem;
+    list-style: none;
+    border-bottom: 1px solid $color-border;
+    font-size: 0;
+    user-select: none;
+    .mb-tabs-nav {
+      font-size: 1rem;
+      display: inline-block;
+      padding: .5rem 2rem;
+      cursor: pointer;
+      position: relative;
+      margin-right: 1rem;
+      &.mb-tabs-nav_active {
+        color: $color-primary;
+        &:after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 3px;
+          bottom: -2px;
+          background-color: $color-primary;
+          left: 0;
+        }
+      }
+    }
+  }
+  .mb-tabs-body {
+    .mb-tabs-pane {
+      display: none;
+      &.mb-tabs-pane_active {
+        display: block;
+      }
+    }
+  }
 }

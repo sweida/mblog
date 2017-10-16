@@ -18,6 +18,8 @@ const Category = require('../controllers/category')
 const Tag = require('../controllers/tag')
 const Nav = require('../controllers/nav')
 
+const Article = require('../controllers/article')
+
 
 module.exports = router => {
 
@@ -61,6 +63,12 @@ module.exports = router => {
     .put('/nav/display/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('nav-update'), Nav.updateDisplay)
     .put('/nav/order/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('nav-update'), Nav.updateOrder)
     .delete('/nav/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('nav-remove'), Nav.remove)
+
+
+    .get('/article/list', verifyAdminToken, Article.getList)
+    .post('/article', verifyAdminToken, verifyJurisdiction('article-add'), Article.add)
+    .put('/article/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('article-update'), Article.update)
+    .delete('/article/:id([0-9a-fA-F]{24})', verifyAdminToken, verifyJurisdiction('article-remove'), Article.remove)
 
 
 

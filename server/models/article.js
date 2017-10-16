@@ -72,6 +72,9 @@ const ArticleSchema = new Schema({
     }
   },
 
+  //草稿
+  draft: Boolean,
+
   //首页置顶
   top: Boolean,
 
@@ -87,16 +90,8 @@ const ArticleSchema = new Schema({
   //允许打赏
   allowReward: Boolean,
 
-  //版权信息
-  copyright: {
-    belong: { //所属
-      type: String,
-      default: 'original' //original : 原创, reprint : 转载
-    },
-    author: String, //作者
-    source: String, //出处网址
-    licenses: String //知识产权协议
-  },
+  //著名版权
+  license: Boolean,
 
   //密码
   password: String,

@@ -26,9 +26,7 @@ const CategorySchema = new Schema({
   order: {
     type: Number,
     default: 1
-  },
-  //冗余字段，用于保存文章ID，便于统计当前分类下文章数量
-  articles: Array,
+  }
 }, {
   connection: TABLE_NAME,
   versionKey: false

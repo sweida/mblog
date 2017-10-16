@@ -1,6 +1,6 @@
 <template>
   <div class="mb-viewport mo-container-fluid">
-    <mb-breadcrumb :links="breadcrumb"></mb-breadcrumb>
+    <mo-breadcrumb :links="breadcrumb"></mo-breadcrumb>
     <div class="mb-panel">
       <div class="mb-panel-head mo-row">
         <h3 class="mo-cell">
@@ -146,14 +146,14 @@
 </template>
 <script>
 import mbSubmit from '@/components/ui/submit'
-import mbBreadcrumb from '@/components/ui/breadcrumb'
+import MoBreadcrumb from '@/components/ui/breadcrumb'
 import fields from '../field/user'
 import { isObjectId, extend } from '@/assets/utils/'
 export default {
   name: 'mb-user-form',
   components: {
     mbSubmit,
-    mbBreadcrumb
+    MoBreadcrumb
   },
   data() {
     let id = this.$route.params.id
